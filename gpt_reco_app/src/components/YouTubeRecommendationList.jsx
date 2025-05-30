@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 function YouTubeRecommendationList({ recommendations, prompt }) {
   const [statuses, setStatuses] = useState({});
+  const [showDuplicates, setShowDuplicates] = useState(false);
 
   useEffect(() => {
     async function checkUrlStatus(url) {
@@ -111,10 +112,21 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
     return 0;
   });
 
+  // Filter duplicates if showDuplicates is false
+  const filteredRecommendations = showDuplicates ? sortedRecommendations : sortedRecommendations.filter(rec => !isDuplicate(rec));
+
   return (
     <div>
+      <button
+        onClick={() => setShowDuplicates(!showDuplicates)}
+        className="mb-2 px-3 py-1 border rounded bg-gray-200 hover:bg-gray-300"
+        aria-pressed={showDuplicates}
+        aria-label="Toggle display of duplicate recommendations"
+      >
+        {showDuplicates ? 'Hide Duplicates' : 'Show Duplicates'}
+      </button>
       <ul className="mt-4 space-y-2">
-        {sortedRecommendations.map((rec, index) => {
+        {filteredRecommendations.map((rec, index) => {
           const status = statuses[rec.channel_url];
           const { liClass, icon } = getStatusStyle(status);
           const duplicate = isDuplicate(rec);
