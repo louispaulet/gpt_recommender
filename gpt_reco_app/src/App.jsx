@@ -1,12 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-function App() {
-  const [count, setCount] = useState(0)
+import React from 'react';
+import { Link, Routes, Route } from 'react-router-dom';
+import About from './pages/About.jsx';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
 
+function App() {
   return (
     <>
-      <div className="flex justify-center">
+      <nav className="bg-gray-800 p-4 text-white">
+        <ul className="flex space-x-4 max-w-4xl mx-auto">
+          <li>
+            <Link to="/" className="hover:underline" aria-label="Home">
+              🏠
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="hover:underline">
+              About
+            </Link>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/about" element={<About />} />
+      </Routes>
+      <div className="flex justify-center mt-8">
         <a href="https://vite.dev" target="_blank" className="transition-filter duration-300 hover:drop-shadow-[0_0_2em_#646cffaa]">
           <img src={viteLogo} className="h-24 p-6" alt="Vite logo" />
         </a>
@@ -16,12 +34,6 @@ function App() {
       </div>
       <h1 className="text-center">Vite + React</h1>
       <div className="p-8">
-<button
-          onClick={() => setCount((count) => count + 1)}
-          className="rounded-lg border border-transparent px-5 py-2.5 text-base font-medium bg-gray-900 cursor-pointer transition-colors duration-250 hover:border-indigo-400 focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500"
-        >
-          count is {count}
-        </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
@@ -30,7 +42,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
