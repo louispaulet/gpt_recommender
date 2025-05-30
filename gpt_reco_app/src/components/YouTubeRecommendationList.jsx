@@ -117,14 +117,27 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
 
   return (
     <div>
-      <button
-        onClick={() => setShowDuplicates(!showDuplicates)}
-        className="mb-2 px-3 py-1 border rounded bg-gray-200 hover:bg-gray-300"
-        aria-pressed={showDuplicates}
-        aria-label="Toggle display of duplicate recommendations"
-      >
-        {showDuplicates ? 'Hide Duplicates' : 'Show Duplicates'}
-      </button>
+      <label className="mb-2 flex items-center cursor-pointer select-none">
+        <span className="mr-3 text-gray-700 font-medium">Show Duplicates</span>
+        <input
+          type="checkbox"
+          checked={showDuplicates}
+          onChange={() => setShowDuplicates(!showDuplicates)}
+          className="sr-only"
+          aria-label="Toggle display of duplicate recommendations"
+        />
+        <div
+          className={`w-11 h-6 rounded-full transition-colors duration-300 ease-in-out ${
+            showDuplicates ? 'bg-green-500' : 'bg-gray-300'
+          }`}
+        >
+          <div
+            className={`bg-white w-5 h-5 rounded-full shadow-md transform transition-transform duration-300 ease-in-out ${
+              showDuplicates ? 'translate-x-5' : 'translate-x-0'
+            }`}
+          />
+        </div>
+      </label>
       <ul className="mt-4 space-y-2">
         {filteredRecommendations.map((rec, index) => {
           const status = statuses[rec.channel_url];
