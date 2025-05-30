@@ -18,6 +18,7 @@ function YouTubeRecommender() {
   const [recommendations, setRecommendations] = useState(null);
   const [loading, setLoading] = useState(false);
   const [apiKey, setApiKey] = useState('');
+  const [numRecommendations, setNumRecommendations] = useState(10);
 
   const getRecommendations = async () => {
     if (!apiKey) {
@@ -32,7 +33,17 @@ function YouTubeRecommender() {
         dangerouslyAllowBrowser: true,
       });
 
-      const prompt = `Based on the following list of YouTube recommendations, please suggest new YouTube channels to watch. The input list is:\n\n${inputText}\n\nPlease respond ONLY in JSON format with a list of recommendations. Each recommendation should have the following fields: "channel_name" (string), "channel_url" (string) where the URL is formatted as "https://www.youtube.com/@" + slug of the channel name.`;
+      const prompt = `
+Based on the following list of YouTube recommendations, please suggest ${numRecommendations} new YouTube channels to watch.
+The input list of subscribed channels:
+
+${inputText}
+
+Please respond ONLY in JSON format with a list of recommendations. 
+Each recommendation should have the following fields: 
+"channel_name" (string), "channel_url" (string) where the URL is formatted as "https://www.youtube.com/@" + slug of the channel name.
+
+Do NOT recommend a channel that is already present in the input list.`;
 
       const response = await client.responses.parse({
         model: 'gpt-4.1-mini',
@@ -72,6 +83,16 @@ function YouTubeRecommender() {
         onChange={(e) => setInputText(e.target.value)}
         className="w-full p-2 border border-gray-300 rounded mb-4 resize-none"
       />
+      <label className="block mb-2">
+        Number of recommendations to make:
+        <input
+          type="number"
+          min="1"
+          value={numRecommendations}
+          onChange={(e) => setNumRecommendations(Number(e.target.value))}
+          className="ml-2 p-1 border border-gray-300 rounded w-16"
+        />
+      </label>
       <button
         onClick={getRecommendations}
         disabled={loading || !inputText || !apiKey}
