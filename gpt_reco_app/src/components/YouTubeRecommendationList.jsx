@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
 function YouTubeRecommendationList({ recommendations, prompt }) {
+  // Remove duplicate recommendations by channel_url
+  const uniqueRecommendations = [];
+  const seenUrls = new Set();
+  for (const rec of recommendations) {
+    if (!seenUrls.has(rec.channel_url)) {
+      uniqueRecommendations.push(rec);
+      seenUrls.add(rec.channel_url);
+    }
+  }
+
   const [statuses, setStatuses] = useState({});
   const [showDuplicates, setShowDuplicates] = useState(false);
 
@@ -17,7 +27,7 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
 
     async function checkAllStatuses() {
       // Update statuses incrementally as each fetch completes
-      for (const rec of recommendations) {
+      for (const rec of uniqueRecommendations) {
         const status = await checkUrlStatus(rec.channel_url);
         setStatuses(prevStatuses => ({
           ...prevStatuses,
@@ -88,7 +98,7 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
   // 2. Then 404 fails (status 404)
   // 3. Then duplicates
   // 4. Then others
-  const sortedRecommendations = [...recommendations].sort((a, b) => {
+  const sortedRecommendations = [...uniqueRecommendations].sort((a, b) => {
     const statusA = statuses[a.channel_url];
     const statusB = statuses[b.channel_url];
     const duplicateA = isDuplicate(a);
