@@ -117,7 +117,7 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
 
   return (
     <div>
-      <label className="mb-2 flex items-center cursor-pointer select-none">
+      <label className="my-3 flex items-center cursor-pointer select-none">
         <span className="mr-3 text-gray-700 font-medium">Show Duplicates</span>
         <input
           type="checkbox"
