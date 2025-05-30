@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function YouTubeRecommendationList({ recommendations }) {
+function YouTubeRecommendationList({ recommendations, prompt }) {
   const [statuses, setStatuses] = useState({});
 
   useEffect(() => {
@@ -15,12 +15,14 @@ function YouTubeRecommendationList({ recommendations }) {
     }
 
     async function checkAllStatuses() {
-      const newStatuses = {};
-      await Promise.all(recommendations.map(async (rec) => {
+      // Update statuses incrementally as each fetch completes
+      for (const rec of recommendations) {
         const status = await checkUrlStatus(rec.channel_url);
-        newStatuses[rec.channel_url] = status;
-      }));
-      setStatuses(newStatuses);
+        setStatuses(prevStatuses => ({
+          ...prevStatuses,
+          [rec.channel_url]: status,
+        }));
+      }
     }
 
     checkAllStatuses();
@@ -63,26 +65,78 @@ function YouTubeRecommendationList({ recommendations }) {
     }
   }
 
+  function isDuplicate(rec) {
+    if (!prompt) return false;
+    // Escape special regex characters in channel_name and channel_url
+    const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const namePattern = new RegExp(`\\b${escapeRegex(rec.channel_name)}\\b`, 'i');
+    const urlPattern = new RegExp(escapeRegex(rec.channel_url), 'i');
+    return namePattern.test(prompt) || urlPattern.test(prompt);
+  }
+
+  function getDuplicateIcon() {
+    return (
+      <svg className="w-5 h-5 text-yellow-500 ml-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true" title="Duplicate">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+      </svg>
+    );
+  }
+
+  // Sort recommendations according to the criteria:
+  // 1. Perfect ones (status 200)
+  // 2. Then 404 fails (status 404)
+  // 3. Then duplicates
+  // 4. Then others
+  const sortedRecommendations = [...recommendations].sort((a, b) => {
+    const statusA = statuses[a.channel_url];
+    const statusB = statuses[b.channel_url];
+    const duplicateA = isDuplicate(a);
+    const duplicateB = isDuplicate(b);
+
+    // Helper function to get rank for sorting
+    function getRank(status, duplicate) {
+      if (status === 200) return 1;
+      if (status === 404) return 2;
+      if (duplicate) return 3;
+      return 4;
+    }
+
+    const rankA = getRank(statusA, duplicateA);
+    const rankB = getRank(statusB, duplicateB);
+
+    if (rankA !== rankB) {
+      return rankA - rankB;
+    }
+    // If same rank, keep original order (stable sort)
+    return 0;
+  });
+
   return (
-    <ul className="mt-4 space-y-2">
-      {recommendations.map((rec, index) => {
-        const status = statuses[rec.channel_url];
-        const { liClass, icon } = getStatusStyle(status);
-        return (
-          <li key={index} className={liClass}>
-            <a
-              href={rec.channel_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
-            >
-              {rec.channel_name}
-            </a>
-            {icon}
-          </li>
-        );
-      })}
-    </ul>
+    <div>
+      <ul className="mt-4 space-y-2">
+        {sortedRecommendations.map((rec, index) => {
+          const status = statuses[rec.channel_url];
+          const { liClass, icon } = getStatusStyle(status);
+          const duplicate = isDuplicate(rec);
+          return (
+            <li key={index} className={liClass}>
+              <a
+                href={rec.channel_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                {rec.channel_name}
+              </a>
+              <div className="flex items-center">
+                {icon}
+                {duplicate && getDuplicateIcon()}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 

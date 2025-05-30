@@ -19,6 +19,7 @@ function YouTubeRecommender() {
   const [loading, setLoading] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [numRecommendations, setNumRecommendations] = useState(10);
+  const [prompt, setPrompt] = useState('');
 
   const getRecommendations = async () => {
     if (!apiKey) {
@@ -33,7 +34,7 @@ function YouTubeRecommender() {
         dangerouslyAllowBrowser: true,
       });
 
-      const prompt = `
+      const newPrompt = `
 Based on the following list of YouTube recommendations, please suggest ${numRecommendations} new YouTube channels to watch.
 The input list of subscribed channels:
 
@@ -45,11 +46,13 @@ Each recommendation should have the following fields:
 
 Do NOT recommend a channel that is already present in the input list.`;
 
+      setPrompt(newPrompt);
+
       const response = await client.responses.parse({
         model: 'gpt-4.1-nano',
         input: [
           { role: 'system', content: 'You are a helpful assistant that recommends YouTube channels.' },
-          { role: 'user', content: prompt },
+          { role: 'user', content: newPrompt },
         ],
         text: {
           format: zodTextFormat(RecommendationsResponse, 'recommendations'),
@@ -102,7 +105,7 @@ Do NOT recommend a channel that is already present in the input list.`;
       </button>
       {recommendations && (
         Array.isArray(recommendations) ? (
-          <YouTubeRecommendationList recommendations={recommendations} />
+          <YouTubeRecommendationList recommendations={recommendations} prompt={prompt} />
         ) : (
           <pre className="mt-4 p-3 bg-gray-100 border border-gray-300 rounded whitespace-pre-wrap">{recommendations}</pre>
         )
