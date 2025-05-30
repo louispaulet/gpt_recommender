@@ -1,5 +1,6 @@
 import React from 'react';
 import HomepageComponent from '../components/Homepage.jsx';
+import YouTubeRecommender from '../components/YouTubeRecommender.jsx';
 
 function Homepage() {
   return (
@@ -8,6 +9,7 @@ function Homepage() {
         <p>Please input the OpenAI API key in the text field below.</p>
       </section>
       <HomepageComponent />
+      <YouTubeRecommender />
     </>
   );
 }
