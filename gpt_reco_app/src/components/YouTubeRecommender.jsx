@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import OpenAI from 'openai';
 import { z } from 'zod';
 import { zodTextFormat } from 'openai/helpers/zod';
+import YouTubeRecommendationList from './YouTubeRecommendationList';
 
 const RecommendationSchema = z.object({
   channel_name: z.string(),
@@ -80,20 +81,7 @@ function YouTubeRecommender() {
       </button>
       {recommendations && (
         Array.isArray(recommendations) ? (
-          <ul className="mt-4 space-y-2">
-            {recommendations.map((rec, index) => (
-              <li key={index} className="p-3 border border-gray-300 rounded bg-gray-50">
-                <a
-                  href={rec.channel_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
-                  {rec.channel_name}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <YouTubeRecommendationList recommendations={recommendations} />
         ) : (
           <pre className="mt-4 p-3 bg-gray-100 border border-gray-300 rounded whitespace-pre-wrap">{recommendations}</pre>
         )
