@@ -46,7 +46,7 @@ Each recommendation should have the following fields:
 Do NOT recommend a channel that is already present in the input list.`;
 
       const response = await client.responses.parse({
-        model: 'gpt-4.1-mini',
+        model: 'gpt-4.1-nano',
         input: [
           { role: 'system', content: 'You are a helpful assistant that recommends YouTube channels.' },
           { role: 'user', content: prompt },
