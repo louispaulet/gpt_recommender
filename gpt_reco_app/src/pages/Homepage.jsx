@@ -4,13 +4,15 @@ import YouTubeRecommender from '../components/YouTubeRecommender.jsx';
 
 function Homepage() {
   return (
-    <>
-      <section className="info-section p-4 my-6 bg-gray-100 text-gray-800">
-        <p>Please input the OpenAI API key in the text field below.</p>
+    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+      <section className="mb-10 p-6 bg-indigo-100 rounded-lg shadow-md text-indigo-900 font-medium text-center text-lg">
+        Please input the OpenAI API key in the text field below.
       </section>
       <HomepageComponent />
-      <YouTubeRecommender />
-    </>
+      <div className="mt-12">
+        <YouTubeRecommender />
+      </div>
+    </div>
   );
 }
 
