@@ -127,7 +127,7 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
 
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="bg-white">
       <label className="my-4 flex items-center cursor-pointer select-none">
         <span className="mr-3 text-gray-800 font-semibold">Show Duplicates</span>
         <input
