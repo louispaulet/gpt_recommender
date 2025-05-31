@@ -125,10 +125,11 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
   // Filter duplicates if showDuplicates is false
   const filteredRecommendations = showDuplicates ? sortedRecommendations : sortedRecommendations.filter(rec => !isDuplicate(rec));
 
+
   return (
-    <div>
-      <label className="my-3 flex items-center cursor-pointer select-none">
-        <span className="mr-3 text-gray-700 font-medium">Show Duplicates</span>
+    <div className="bg-white rounded-lg shadow-lg p-6">
+      <label className="my-4 flex items-center cursor-pointer select-none">
+        <span className="mr-3 text-gray-800 font-semibold">Show Duplicates</span>
         <input
           type="checkbox"
           checked={showDuplicates}
@@ -137,33 +138,36 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
           aria-label="Toggle display of duplicate recommendations"
         />
         <div
-          className={`w-11 h-6 rounded-full transition-colors duration-300 ease-in-out ${
+          className={`w-12 h-6 rounded-full transition-colors duration-300 ease-in-out ${
             showDuplicates ? 'bg-indigo-600' : 'bg-gray-300'
           }`}
         >
           <div
-            className={`bg-white w-5 h-5 rounded-full shadow-md transform transition-transform duration-300 ease-in-out ${
-              showDuplicates ? 'translate-x-5' : 'translate-x-0'
+            className={`bg-white w-6 h-6 rounded-full shadow-md transform transition-transform duration-300 ease-in-out ${
+              showDuplicates ? 'translate-x-6' : 'translate-x-0'
             }`}
           />
         </div>
       </label>
-      <ul className="mt-4 space-y-2">
+      <ul className="mt-6 space-y-3">
         {filteredRecommendations.map((rec, index) => {
           const status = statuses[rec.channel_url];
           const { liClass, icon } = getStatusStyle(status);
           const duplicate = isDuplicate(rec);
           return (
-            <li key={index} className={liClass}>
+            <li
+              key={index}
+              className={`${liClass} rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300`}
+            >
               <a
                 href={rec.channel_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-600 hover:underline"
+                className="text-indigo-700 hover:text-indigo-900 font-semibold hover:underline"
               >
                 {rec.channel_name}
               </a>
-              <div className="flex items-center">
+              <div className="flex items-center space-x-2">
                 {icon}
                 {duplicate && getDuplicateIcon()}
               </div>
