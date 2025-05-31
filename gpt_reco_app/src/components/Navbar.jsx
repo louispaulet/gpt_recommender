@@ -12,8 +12,9 @@ function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to="/about" className="hover:underline">
-            About
+          <Link to="/about" className="flex items-center space-x-1">
+            <span role="img" aria-label="about" className="no-underline">ℹ️</span>
+            <span className="hover:underline">About</span>
           </Link>
         </li>
       </ul>
