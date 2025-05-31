@@ -9,7 +9,7 @@ function Homepage() {
         GPT YouTube Channel Recommender
       </h1>
       <section className="mb-10 p-6 bg-indigo-100 rounded-lg shadow-md text-indigo-900 font-medium text-center text-lg">
-        Please input the OpenAI API key in the text field below.
+        Input your current Youtube subscriptions, and get a curated new channel recommendation list!
       </section>
       <HomepageComponent />
       <div className="mt-12">
