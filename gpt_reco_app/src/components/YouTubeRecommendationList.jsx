@@ -185,7 +185,7 @@ function getStatusStyle(status) {
             <div className="group relative cursor-pointer">
               {icon}
               <div
-                className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700"
+                className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 inline-block px-4 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700 whitespace-nowrap max-w-[20rem] overflow-hidden text-ellipsis"
                 style={{ bottom: '125%', left: '50%', transform: 'translateX(-50%)' }}
               >
                 {statusTooltipText}
@@ -198,7 +198,7 @@ function getStatusStyle(status) {
             <div className="group relative cursor-pointer">
               {getDuplicateIcon()}
               <div
-                className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700"
+                className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 inline-block px-4 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700 whitespace-nowrap max-w-[20rem] overflow-hidden text-ellipsis"
                 style={{ bottom: '125%', left: '50%', transform: 'translateX(-50%)' }}
               >
                 Duplicate
