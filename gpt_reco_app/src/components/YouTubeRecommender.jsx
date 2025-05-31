@@ -8,6 +8,7 @@ import YouTubeRecommendationList from './YouTubeRecommendationList';
 const RecommendationSchema = z.object({
   channel_name: z.string(),
   channel_url: z.string(),
+  recommendation_reason: z.string(),
 });
 
 const RecommendationsResponse = z.object({
@@ -51,7 +52,8 @@ ${inputText}
 
 Please respond ONLY in JSON format with a list of recommendations. 
 Each recommendation should have the following fields: 
-"channel_name" (string), "channel_url" (string) where the URL is formatted as "https://www.youtube.com/@" + slug of the channel name.
+"channel_name" (string), "channel_url" (string) where the URL is formatted as "https://www.youtube.com/@" + slug of the channel name,
+and "recommendation_reason" (string) which is a single short sentence explaining why this channel is recommended.
 
 Do NOT recommend a channel that is already present in the input list.`;
 
