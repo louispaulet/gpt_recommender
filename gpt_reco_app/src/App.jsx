@@ -2,33 +2,29 @@ import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import About from './pages/About.jsx';
 import Homepage from './pages/Homepage.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
+import TermsOfService from './pages/TermsOfService.jsx';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 
+import Navbar from './components/Navbar.jsx';
+
+import Footer from './components/Footer.jsx';
+
 function App() {
   return (
-    <>
-      <nav className="bg-gray-800 p-4 text-white">
-        <ul className="flex space-x-4 max-w-4xl mx-auto">
-          <li>
-            <Link to="/" className="hover:underline" aria-label="Home">
-              🏠
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" className="hover:underline">
-              About
-            </Link>
-          </li>
-        </ul>
-      </nav>
-      <div className="px-4 max-w-4xl mx-auto">
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <main className="flex-grow px-4 max-w-4xl mx-auto">
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
         </Routes>
-      </div>
-    </>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
