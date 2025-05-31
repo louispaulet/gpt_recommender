@@ -16,10 +16,11 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
 
   useEffect(() => {
     async function checkUrlStatus(url) {
-      const proxyUrl = 'https://corsproxy.io/?url=' + (url);
+      const proxyUrl = 'https://head-checker.louispaulet13.workers.dev/?url=' + (url);
       try {
         const response = await fetch(proxyUrl, { method: 'GET' });
-        return response.status;
+        const data = await response.json();
+        return data.status;
       } catch (error) {
         return null; // network error or other
       }
