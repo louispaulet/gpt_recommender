@@ -1,5 +1,7 @@
 # GPT YouTube Channel Recommender
 
+[![Main Illustration](default_screenshot.png)](default_screenshot.png)
+
 A React + Vite web application that leverages OpenAI's GPT-4.1-nano model to recommend new YouTube channels based on your current subscriptions. Input your OpenAI API key and a list of your subscribed channels to receive personalized channel recommendations.
 
 ## Features
