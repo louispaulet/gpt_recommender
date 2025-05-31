@@ -40,42 +40,48 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
     checkAllStatuses();
   }, [recommendations]);
 
-  function getStatusStyle(status) {
-    if (status === 200) {
-      return {
-        liClass: 'p-3 border border-green-500 rounded bg-green-100 flex items-center justify-between',
-        icon: (
+function getStatusStyle(status) {
+  if (status === 200) {
+    return {
+      liClass: 'p-3 border border-green-500 rounded bg-green-100 flex items-center justify-between',
+      icon: (
+        <div className="tooltip" data-tooltip="Verified Link (HTTP 200)">
           <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
-        ),
-      };
-    } else if (status === 404) {
-      return {
-        liClass: 'p-3 border border-gray-400 rounded bg-gray-200 text-gray-500 flex items-center justify-between',
-        icon: (
+        </div>
+      ),
+    };
+  } else if (status === 404) {
+    return {
+      liClass: 'p-3 border border-gray-400 rounded bg-gray-200 text-gray-500 flex items-center justify-between',
+      icon: (
+        <div className="tooltip" data-tooltip="Incorrect Link (HTTP 404)">
           <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
-        ),
-      };
-    } else if (status) {
-      return {
-        liClass: 'p-3 border border-green-300 rounded bg-green-50 text-orange-600 flex items-center justify-between',
-        icon: (
+        </div>
+      ),
+    };
+  } else if (status) {
+    return {
+      liClass: 'p-3 border border-green-300 rounded bg-green-50 text-orange-600 flex items-center justify-between',
+      icon: (
+        <div className="tooltip" data-tooltip={`Link Status: HTTP ${status}`}>
           <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-        ),
-      };
-    } else {
-      // status null or undefined, loading or error
-      return {
-        liClass: 'p-3 border border-gray-300 rounded bg-gray-50 flex items-center justify-between',
-        icon: null,
-      };
-    }
+        </div>
+      ),
+    };
+  } else {
+    // status null or undefined, loading or error
+    return {
+      liClass: 'p-3 border border-gray-300 rounded bg-gray-50 flex items-center justify-between',
+      icon: null,
+    };
   }
+}
 
   function isDuplicate(rec) {
     if (!prompt) return false;
@@ -150,32 +156,62 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
           />
         </div>
       </label>
-      <ul className="mt-6 space-y-3">
-        {filteredRecommendations.map((rec, index) => {
-          const status = statuses[rec.channel_url];
-          const { liClass, icon } = getStatusStyle(status);
-          const duplicate = isDuplicate(rec);
-          return (
-            <li
-              key={index}
-              className={`${liClass} rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300`}
-            >
-              <a
-                href={rec.channel_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-indigo-700 hover:text-indigo-900 font-semibold hover:underline"
+      <ul className="mt-6 space-y-3 relative">
+  {filteredRecommendations.map((rec, index) => {
+    const status = statuses[rec.channel_url];
+    const { liClass, icon } = getStatusStyle(status);
+    const duplicate = isDuplicate(rec);
+    // Tooltip text for status
+    let statusTooltipText = '';
+    if (status === 200) statusTooltipText = 'Verified Link (HTTP 200)';
+    else if (status === 404) statusTooltipText = 'Incorrect Link (HTTP 404)';
+    else if (status) statusTooltipText = `Link Status: HTTP ${status}`;
+    return (
+      <li
+        key={index}
+        className={`${liClass} rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-between`}
+      >
+        <a
+          href={rec.channel_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-indigo-700 hover:text-indigo-900 font-semibold hover:underline"
+        >
+          {rec.channel_name}
+        </a>
+        <div className="flex items-center space-x-2 relative">
+          {/* Status Icon with Tooltip */}
+          {icon && (
+            <div className="group relative cursor-pointer">
+              {icon}
+              <div
+                className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 inline-block px-4 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700 whitespace-nowrap max-w-[20rem] overflow-hidden text-ellipsis"
+                style={{ bottom: '125%', left: '50%', transform: 'translateX(-50%)' }}
               >
-                {rec.channel_name}
-              </a>
-              <div className="flex items-center space-x-2">
-                {icon}
-                {duplicate && getDuplicateIcon()}
+                {statusTooltipText}
+                <div className="tooltip-arrow" data-popper-arrow></div>
               </div>
-            </li>
-          );
-        })}
-      </ul>
+            </div>
+          )}
+          {/* Duplicate Icon with Tooltip */}
+          {duplicate && (
+            <div className="group relative cursor-pointer">
+              {getDuplicateIcon()}
+              <div
+                className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 inline-block px-4 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700 whitespace-nowrap max-w-[20rem] overflow-hidden text-ellipsis"
+                style={{ bottom: '125%', left: '50%', transform: 'translateX(-50%)' }}
+              >
+                Duplicate
+                <div className="tooltip-arrow" data-popper-arrow></div>
+              </div>
+            </div>
+          )}
+        </div>
+      </li>
+    );
+  })}
+</ul>
+
     </div>
   );
 }

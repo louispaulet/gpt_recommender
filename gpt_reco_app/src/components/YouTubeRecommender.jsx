@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import OpenAI from 'openai';
+import Cookies from 'js-cookie';
 import { z } from 'zod';
 import { zodTextFormat } from 'openai/helpers/zod';
 import YouTubeRecommendationList from './YouTubeRecommendationList';
@@ -21,9 +22,17 @@ function YouTubeRecommender() {
   const [numRecommendations, setNumRecommendations] = useState(10);
   const [prompt, setPrompt] = useState('');
 
+  useEffect(() => {
+    // Load API key from cookie on mount
+    const savedKey = Cookies.get('openai_api_key');
+    if (savedKey) {
+      setApiKey(savedKey);
+    }
+  }, []);
+
   const getRecommendations = async () => {
     if (!apiKey) {
-      setRecommendations('Please enter your OpenAI API key above to get recommendations.');
+      setRecommendations('API key not found. Please set your OpenAI API key in the homepage.');
       return;
     }
     setLoading(true);
@@ -72,13 +81,6 @@ Do NOT recommend a channel that is already present in the input list.`;
   return (
     <section className="max-w-3xl mx-auto p-8 mt-10 bg-white rounded-lg shadow-lg">
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900">YouTube Channel Recommender</h2>
-      <input
-        type="text"
-        placeholder="Enter your OpenAI API key"
-        value={apiKey}
-        onChange={(e) => setApiKey(e.target.value)}
-        className="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-      />
       <textarea
         rows={5}
         placeholder="Paste your current YouTube recommendations here (names and URLs if available)"
@@ -98,7 +100,7 @@ Do NOT recommend a channel that is already present in the input list.`;
       </label>
       <button
         onClick={getRecommendations}
-        disabled={loading || !inputText || !apiKey}
+        disabled={loading || !inputText}
         className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
       >
         {loading ? 'Getting Recommendations...' : 'Get Recommendations'}
