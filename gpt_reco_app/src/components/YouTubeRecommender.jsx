@@ -70,36 +70,36 @@ Do NOT recommend a channel that is already present in the input list.`;
   };
 
   return (
-    <section className="max-w-4xl mx-auto p-4 mt-8 border border-gray-300 rounded shadow-sm bg-white">
-      <h2 className="text-xl font-semibold mb-2">YouTube Channel Recommender</h2>
+    <section className="max-w-3xl mx-auto p-8 mt-10 bg-white rounded-lg shadow-lg">
+      <h2 className="text-3xl font-extrabold mb-6 text-gray-900">YouTube Channel Recommender</h2>
       <input
         type="text"
         placeholder="Enter your OpenAI API key"
         value={apiKey}
         onChange={(e) => setApiKey(e.target.value)}
-        className="w-full p-2 border border-gray-300 rounded mb-4"
+        className="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
       />
       <textarea
         rows={5}
         placeholder="Paste your current YouTube recommendations here (names and URLs if available)"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
-        className="w-full p-2 border border-gray-300 rounded mb-4 resize-none"
+        className="w-full p-3 border border-gray-300 rounded-lg mb-6 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
       />
-      <label className="block mb-2">
+      <label className="block mb-4 text-gray-700 font-medium">
         Number of recommendations to make:
         <input
           type="number"
           min="1"
           value={numRecommendations}
           onChange={(e) => setNumRecommendations(Number(e.target.value))}
-          className="ml-2 p-1 border border-gray-300 rounded w-16"
+          className="ml-3 p-2 border border-gray-300 rounded w-20 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
         />
       </label>
       <button
         onClick={getRecommendations}
         disabled={loading || !inputText || !apiKey}
-        className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
+        className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
       >
         {loading ? 'Getting Recommendations...' : 'Get Recommendations'}
       </button>
@@ -107,7 +107,7 @@ Do NOT recommend a channel that is already present in the input list.`;
         Array.isArray(recommendations) ? (
           <YouTubeRecommendationList recommendations={recommendations} prompt={prompt} />
         ) : (
-          <pre className="mt-4 p-3 bg-gray-100 border border-gray-300 rounded whitespace-pre-wrap">{recommendations}</pre>
+          <pre className="mt-6 p-4 bg-gray-100 border border-gray-300 rounded-lg whitespace-pre-wrap">{recommendations}</pre>
         )
       )}
     </section>
