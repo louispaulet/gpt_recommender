@@ -170,17 +170,23 @@ function getStatusStyle(status) {
     return (
       <li
         key={index}
-        className={`${liClass} rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-between space-x-4 p-3`}
+        className={`${liClass} rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-between space-x-4 p-3 cursor-pointer`}
+        role="link"
+        tabIndex={0}
+        onClick={() => window.open(rec.channel_url, '_blank', 'noopener,noreferrer')}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            window.open(rec.channel_url, '_blank', 'noopener,noreferrer');
+          }
+        }}
       >
-        <a
-          href={rec.channel_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-indigo-700 hover:text-indigo-900 font-semibold hover:underline flex-shrink-0"
+        <span
+          className="text-indigo-700 font-semibold flex-shrink-0"
           style={{ minWidth: '10rem' }}
         >
           {rec.channel_name}
-        </a>
+        </span>
         <p className="flex-grow text-center text-gray-700 text-sm italic truncate">{rec.recommendation_reason}</p>
         <div className="flex items-center space-x-2 relative flex-shrink-0">
           {/* Status Icon with Tooltip */}
