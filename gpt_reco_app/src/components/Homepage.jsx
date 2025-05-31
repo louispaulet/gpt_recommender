@@ -73,7 +73,7 @@ function HomepageComponent() {
         disabled={loading || !apiKey}
         className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
       >
-        {loading ? 'Checking...' : 'Check API Key'}
+        {loading ? 'Checking...' : 'Check and save API Key'}
       </button>
 
       {apiKey && (
