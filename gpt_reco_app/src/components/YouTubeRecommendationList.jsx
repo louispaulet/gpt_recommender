@@ -95,9 +95,7 @@ function getStatusStyle(status) {
 
   function getDuplicateIcon() {
     return (
-      <svg className="w-5 h-5 text-yellow-500 ml-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true" title="Duplicate">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-      </svg>
+      <span className="text-green-500 ml-2" title="Duplicate" aria-label="Duplicate">&#x267B;</span>
     );
   }
 
