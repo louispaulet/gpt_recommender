@@ -11,6 +11,7 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
     }
   }
 
+
   const [statuses, setStatuses] = useState({});
   const [showDuplicates, setShowDuplicates] = useState(false);
 
@@ -94,9 +95,7 @@ function getStatusStyle(status) {
 
   function getDuplicateIcon() {
     return (
-      <svg className="w-5 h-5 text-yellow-500 ml-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true" title="Duplicate">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-      </svg>
+      <span className="text-green-500 ml-2" title="Duplicate" aria-label="Duplicate">&#x267B;</span>
     );
   }
 
@@ -169,17 +168,25 @@ function getStatusStyle(status) {
     return (
       <li
         key={index}
-        className={`${liClass} rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-between`}
+        className={`${liClass} rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-3 cursor-pointer flex flex-col md:flex-row md:items-center md:justify-between`}
+        role="link"
+        tabIndex={0}
+        onClick={() => window.open(rec.channel_url, '_blank', 'noopener,noreferrer')}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            window.open(rec.channel_url, '_blank', 'noopener,noreferrer');
+          }
+        }}
       >
-        <a
-          href={rec.channel_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-indigo-700 hover:text-indigo-900 font-semibold hover:underline"
+        <span
+          className="text-indigo-700 font-semibold mb-2 md:mb-0"
+          style={{ minWidth: '10rem' }}
         >
           {rec.channel_name}
-        </a>
-        <div className="flex items-center space-x-2 relative">
+        </span>
+        <p className="text-gray-700 text-sm italic mb-2 md:mb-0 md:flex-grow md:text-center">{rec.recommendation_reason}</p>
+        <div className="flex items-center space-x-2 flex-shrink-0">
           {/* Status Icon with Tooltip */}
           {icon && (
             <div className="group relative cursor-pointer">

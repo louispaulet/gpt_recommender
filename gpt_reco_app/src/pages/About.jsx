@@ -8,8 +8,8 @@ const About = () => {
         <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-indigo-400 pb-1">
           What is this?
         </h2>
-        <p className="text-lg leading-relaxed">
-          This application leverages the power of <strong>OpenAI's GPT-4.1-nano</strong> model to provide personalized YouTube channel recommendations based on your current subscriptions. By analyzing your existing channels, it suggests new content creators tailored to your interests.
+        <p className="text-lg leading-relaxed text-left">
+          This application leverages the power of <strong>OpenAI's GPT-4.1-nano</strong> model to provide personalized YouTube channel recommendations based on your current subscriptions.<br />By analyzing your existing channels, it suggests new content creators tailored to your interests.
         </p>
       </section>
       <section className="mb-10">

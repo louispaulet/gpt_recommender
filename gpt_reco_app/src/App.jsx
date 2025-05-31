@@ -22,7 +22,7 @@ function App() {
           </li>
         </ul>
       </nav>
-      <div className="mx-4 max-w-4xl mx-auto">
+      <div className="px-4 max-w-4xl mx-auto">
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/about" element={<About />} />
