@@ -1,9 +1,9 @@
 {
-  "name": "imagen_app",
+  "name": "gpt_recommender",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://louispaulet.github.io/image_gen_1",
+  "homepage": "https://louispaulet.github.io/gpt_recommender",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
