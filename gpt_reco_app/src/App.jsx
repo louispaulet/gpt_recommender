@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import About from './pages/About.jsx';
 import Homepage from './pages/Homepage.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
+import TermsOfService from './pages/TermsOfService.jsx';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 
@@ -17,6 +19,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
         </Routes>
       </main>
       <Footer />
