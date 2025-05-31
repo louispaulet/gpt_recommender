@@ -45,7 +45,7 @@ function getStatusStyle(status) {
     return {
       liClass: 'p-3 border border-green-500 rounded bg-green-100 flex items-center justify-between',
       icon: (
-        <div className="tooltip" data-tooltip="Link verified (HTTP 200)">
+        <div className="tooltip" data-tooltip="Verified Link (HTTP 200)">
           <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
@@ -56,7 +56,7 @@ function getStatusStyle(status) {
     return {
       liClass: 'p-3 border border-gray-400 rounded bg-gray-200 text-gray-500 flex items-center justify-between',
       icon: (
-        <div className="tooltip" data-tooltip="Link incorrect (HTTP 404)">
+        <div className="tooltip" data-tooltip="Incorrect Link (HTTP 404)">
           <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -67,7 +67,7 @@ function getStatusStyle(status) {
     return {
       liClass: 'p-3 border border-green-300 rounded bg-green-50 text-orange-600 flex items-center justify-between',
       icon: (
-        <div className="tooltip" data-tooltip={`Link status: HTTP ${status}`}>
+        <div className="tooltip" data-tooltip={`Link Status: HTTP ${status}`}>
           <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
@@ -163,9 +163,9 @@ function getStatusStyle(status) {
     const duplicate = isDuplicate(rec);
     // Tooltip text for status
     let statusTooltipText = '';
-    if (status === 200) statusTooltipText = 'Link verified (HTTP 200)';
-    else if (status === 404) statusTooltipText = 'Link incorrect (HTTP 404)';
-    else if (status) statusTooltipText = `Link status: HTTP ${status}`;
+    if (status === 200) statusTooltipText = 'Verified Link (HTTP 200)';
+    else if (status === 404) statusTooltipText = 'Incorrect Link (HTTP 404)';
+    else if (status) statusTooltipText = `Link Status: HTTP ${status}`;
     return (
       <li
         key={index}
