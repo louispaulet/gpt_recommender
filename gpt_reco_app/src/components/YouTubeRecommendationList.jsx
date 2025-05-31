@@ -138,7 +138,7 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
         />
         <div
           className={`w-11 h-6 rounded-full transition-colors duration-300 ease-in-out ${
-            showDuplicates ? 'bg-green-500' : 'bg-gray-300'
+            showDuplicates ? 'bg-indigo-600' : 'bg-gray-300'
           }`}
         >
           <div
@@ -159,7 +159,7 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
                 href={rec.channel_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
+                className="text-indigo-600 hover:underline"
               >
                 {rec.channel_name}
               </a>
