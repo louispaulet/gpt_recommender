@@ -79,7 +79,10 @@ function YouTubeCriticizer({ subscriptions, recommendations }) {
       </button>
       {error && <p className="text-red-600 mb-4">{error}</p>}
       {improvedRecommendations.length > 0 && (
-        <YouTubeRecommendationList recommendations={improvedRecommendations} prompt="" />
+        <YouTubeRecommendationList
+          recommendations={improvedRecommendations}
+          prompt={`User subscriptions: ${subscriptions.join(', ')}. Previous recommendations: ${recommendations.map(r => r.channel_name).join(', ')}`}
+        />
       )}
     </div>
   );
