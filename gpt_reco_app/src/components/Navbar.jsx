@@ -12,18 +12,21 @@ function Navbar() {
               <span className="font-bold text-xl text-gray-900">GPT Recommender</span>
             </Link>
             <div className="flex space-x-6">
-              <Link to="/" className="text-gray-700 hover:text-blue-600 font-semibold">
-                Home
-              </Link>
-              <Link to="/about" className="text-gray-700 hover:text-blue-600 font-semibold">
-                About
-              </Link>
-            </div>
-          </div>
-          <div></div>
+          <Link to="/" className="text-gray-700 hover:text-blue-600 font-semibold">
+            Home
+          </Link>
+          <Link to="/about" className="text-gray-700 hover:text-blue-600 font-semibold">
+            About
+          </Link>
+          <Link to="/video-recommendations" className="text-gray-700 hover:text-blue-600 font-semibold">
+            Video Recommendations
+          </Link>
         </div>
       </div>
-    </nav>
+      <div></div>
+    </div>
+  </div>
+</nav>
   );
 }
 
