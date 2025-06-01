@@ -39,7 +39,7 @@ function HomepageComponent() {
         Cookies.remove('openai_api_key');
       }
     } catch (error) {
-      setCheckResult({ message: 'API key is invalid or request failed.', status: 'error' });
+      setCheckResult({ message: `API key is invalid or request failed: ${error.message}`, status: 'error' });
       // Remove invalid key from cookie if any
       Cookies.remove('openai_api_key');
     } finally {
