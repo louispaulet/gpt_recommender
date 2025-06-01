@@ -3,21 +3,26 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <nav className="bg-gray-800 p-4 text-white">
-      <ul className="flex space-x-4 max-w-4xl mx-auto">
-        <li>
-          <Link to="/" className="flex items-center space-x-1" aria-label="Home">
-            <span role="img" aria-label="home" className="no-underline">🏠</span>
-            <span className="hover:underline">Home</span>
-          </Link>
-        </li>
-        <li>
-          <Link to="/about" className="flex items-center space-x-1">
-            <span role="img" aria-label="about" className="no-underline">ℹ️</span>
-            <span className="hover:underline">About</span>
-          </Link>
-        </li>
-      </ul>
+    <nav className="bg-white border-b border-gray-300 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
+          <div className="flex items-center space-x-8">
+            <Link to="/" className="flex items-center space-x-2" aria-label="Logo">
+              <span role="img" aria-label="thumbs up" className="text-3xl">👍</span>
+              <span className="font-bold text-xl text-gray-900">GPT Recommender</span>
+            </Link>
+            <div className="hidden md:flex space-x-6">
+              <Link to="/" className="text-gray-700 hover:text-blue-600 font-semibold">
+                Home
+              </Link>
+              <Link to="/about" className="text-gray-700 hover:text-blue-600 font-semibold">
+                About
+              </Link>
+            </div>
+          </div>
+          <div></div>
+        </div>
+      </div>
     </nav>
   );
 }
