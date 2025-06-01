@@ -41,9 +41,11 @@ Theme: ${theme}
 
 Please respond ONLY in JSON format with a list of recommendations.
 Each recommendation should have the following fields:
-"video_name" (string), "video_url" (string) which is a valid YouTube video URL.
+"video_name" (string), "video_url" (string) which is a valid YouTube video URL (example : https://www.youtube.com/watch?v=u4PmdHop5c8).
 
-Do NOT include channels, only individual videos.`;
+Do NOT include channels, only individual videos.
+Please make sure to recommend videos with a valid URL.  
+`;
 
       setPrompt(newPrompt);
 
