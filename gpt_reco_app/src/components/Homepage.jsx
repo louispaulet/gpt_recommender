@@ -7,6 +7,7 @@ function HomepageComponent() {
   const [cookieApiKeyLoaded, setCookieApiKeyLoaded] = useState(false);
   const [checkResult, setCheckResult] = useState(null); // { message: string, status: 'success' | 'error' }
   const [loading, setLoading] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     // Load API key from cookie on mount
@@ -20,6 +21,7 @@ function HomepageComponent() {
   const checkApiKey = async () => {
     setLoading(true);
     setCheckResult(null);
+    setFadeOut(false);
     try {
       const client = new OpenAI({
         apiKey: apiKey,
@@ -42,19 +44,27 @@ function HomepageComponent() {
         Cookies.remove('openai_api_key');
         setCookieApiKeyLoaded(false);
       }
-      // Clear the message after 5 seconds
+      // Start fade away effect at 2.5 seconds, clear message at 3 seconds
+      setTimeout(() => {
+        setFadeOut(true);
+      }, 2500);
       setTimeout(() => {
         setCheckResult(null);
-      }, 5000);
+        setFadeOut(false);
+      }, 3000);
     } catch (error) {
       setCheckResult({ message: `API key is invalid or request failed: ${error.message}`, status: 'error' });
       // Remove invalid key from cookie if any
       Cookies.remove('openai_api_key');
       setCookieApiKeyLoaded(false);
-      // Clear the message after 5 seconds
+      // Start fade away effect at 2.5 seconds, clear message at 3 seconds
+      setTimeout(() => {
+        setFadeOut(true);
+      }, 2500);
       setTimeout(() => {
         setCheckResult(null);
-      }, 5000);
+        setFadeOut(false);
+      }, 3000);
     } finally {
       setLoading(false);
     }
@@ -65,10 +75,15 @@ function HomepageComponent() {
     setApiKey('');
     setCheckResult({ message: 'API key deleted.', status: 'success' });
     setCookieApiKeyLoaded(false);
-    // Clear the message after 5 seconds
+    setFadeOut(false);
+    // Start fade away effect at 2.5 seconds, clear message at 3 seconds
+    setTimeout(() => {
+      setFadeOut(true);
+    }, 2500);
     setTimeout(() => {
       setCheckResult(null);
-    }, 5000);
+      setFadeOut(false);
+    }, 3000);
   };
 
   return (
@@ -103,7 +118,9 @@ function HomepageComponent() {
 
       {checkResult && (
         <p
-          className={`mt-6 p-4 rounded-lg flex items-center text-lg font-medium ${
+          className={`mt-6 p-4 rounded-lg flex items-center text-lg font-medium transition-opacity duration-500 ${
+            fadeOut ? 'opacity-0' : 'opacity-100'
+          } ${
             checkResult.status === 'success'
               ? 'bg-green-100 text-green-900 border border-green-400'
               : 'bg-red-100 text-red-900 border border-red-400'
