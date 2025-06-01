@@ -4,20 +4,24 @@ import Cookies from 'js-cookie';
 
 function HomepageComponent() {
   const [apiKey, setApiKey] = useState('');
+  const [cookieApiKeyLoaded, setCookieApiKeyLoaded] = useState(false);
   const [checkResult, setCheckResult] = useState(null); // { message: string, status: 'success' | 'error' }
   const [loading, setLoading] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     // Load API key from cookie on mount
     const savedKey = Cookies.get('openai_api_key');
     if (savedKey) {
       setApiKey(savedKey);
+      setCookieApiKeyLoaded(true);
     }
   }, []);
 
   const checkApiKey = async () => {
     setLoading(true);
     setCheckResult(null);
+    setFadeOut(false);
     try {
       const client = new OpenAI({
         apiKey: apiKey,
@@ -33,15 +37,34 @@ function HomepageComponent() {
         setCheckResult({ message: 'API key is valid.', status: 'success' });
         // Save valid API key to cookie for 30 days
         Cookies.set('openai_api_key', apiKey, { expires: 30, secure: true, sameSite: 'strict' });
+        setCookieApiKeyLoaded(true);
       } else {
         setCheckResult({ message: 'API key is invalid or request failed.', status: 'error' });
         // Remove invalid key from cookie if any
         Cookies.remove('openai_api_key');
+        setCookieApiKeyLoaded(false);
       }
+      // Start fade away effect at 2.5 seconds, clear message at 3 seconds
+      setTimeout(() => {
+        setFadeOut(true);
+      }, 2500);
+      setTimeout(() => {
+        setCheckResult(null);
+        setFadeOut(false);
+      }, 3000);
     } catch (error) {
       setCheckResult({ message: `API key is invalid or request failed: ${error.message}`, status: 'error' });
       // Remove invalid key from cookie if any
       Cookies.remove('openai_api_key');
+      setCookieApiKeyLoaded(false);
+      // Start fade away effect at 2.5 seconds, clear message at 3 seconds
+      setTimeout(() => {
+        setFadeOut(true);
+      }, 2500);
+      setTimeout(() => {
+        setCheckResult(null);
+        setFadeOut(false);
+      }, 3000);
     } finally {
       setLoading(false);
     }
@@ -51,6 +74,16 @@ function HomepageComponent() {
     Cookies.remove('openai_api_key');
     setApiKey('');
     setCheckResult({ message: 'API key deleted.', status: 'success' });
+    setCookieApiKeyLoaded(false);
+    setFadeOut(false);
+    // Start fade away effect at 2.5 seconds, clear message at 3 seconds
+    setTimeout(() => {
+      setFadeOut(true);
+    }, 2500);
+    setTimeout(() => {
+      setCheckResult(null);
+      setFadeOut(false);
+    }, 3000);
   };
 
   return (
@@ -71,21 +104,23 @@ function HomepageComponent() {
         {loading ? 'Checking...' : 'Check and save API Key'}
       </button>
 
-      {apiKey && (
-        <div className="mt-6 flex justify-between items-center bg-green-100 border border-green-400 text-green-900 p-4 rounded-lg">
-          <p className="text-lg font-medium">API key is loaded from cookie.</p>
-          <button
-            onClick={deleteApiKey}
-            className="ml-4 py-2 px-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition"
-          >
-            Delete Key
-          </button>
-        </div>
+      {apiKey && cookieApiKeyLoaded && (
+      <div className="mt-6 flex justify-between items-center bg-green-100 border border-green-400 text-green-900 p-4 rounded-lg">
+        <p className="text-lg font-medium">API key is loaded from cookie.</p>
+        <button
+          onClick={deleteApiKey}
+          className="ml-4 py-2 px-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition"
+        >
+          Delete Key
+        </button>
+      </div>
       )}
 
       {checkResult && (
         <p
-          className={`mt-6 p-4 rounded-lg flex items-center text-lg font-medium ${
+          className={`mt-6 p-4 rounded-lg flex items-center text-lg font-medium transition-opacity duration-500 ${
+            fadeOut ? 'opacity-0' : 'opacity-100'
+          } ${
             checkResult.status === 'success'
               ? 'bg-green-100 text-green-900 border border-green-400'
               : 'bg-red-100 text-red-900 border border-red-400'

@@ -33,16 +33,9 @@ function YouTubeRecommender() {
       .filter((s) => s.length > 0);
   };
 
-  useEffect(() => {
-    // Load API key from cookie on mount
-    const savedKey = Cookies.get('openai_api_key');
-    if (savedKey) {
-      setApiKey(savedKey);
-    }
-  }, []);
-
   const getRecommendations = async () => {
-    if (!apiKey) {
+    const currentApiKey = Cookies.get('openai_api_key');
+    if (!currentApiKey) {
       setRecommendations('API key not found. Please set your OpenAI API key in the homepage.');
       return;
     }
@@ -50,7 +43,7 @@ function YouTubeRecommender() {
     setRecommendations(null);
     try {
       const client = new OpenAI({
-        apiKey: apiKey,
+        apiKey: currentApiKey,
         dangerouslyAllowBrowser: true,
       });
 
