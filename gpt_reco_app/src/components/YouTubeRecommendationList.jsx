@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { checkUrlStatus, getStatusStyle } from '../utils/urlStatusChecker.js';
 
 function YouTubeRecommendationList({ recommendations, prompt }) {
   // Remove duplicate recommendations by channel_url
@@ -14,23 +15,10 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
     return uniqueRecs;
   }, [recommendations]);
 
-
   const [statuses, setStatuses] = useState({});
   const [showDuplicates, setShowDuplicates] = useState(false);
 
   useEffect(() => {
-    async function checkUrlStatus(url) {
-      const proxyUrl = 'https://head-checker.louispaulet13.workers.dev/?url=' + (url);
-      try {
-        const response = await fetch(proxyUrl, { method: 'GET' });
-        const data = await response.json();
-        return data.status;
-      } catch (error) {
-        console.error('Error fetching URL status:', error);
-        return null; // network error or other
-      }
-    }
-
     async function checkAllStatuses() {
       // Update statuses incrementally as each fetch completes
       for (const rec of uniqueRecommendations) {
@@ -44,49 +32,6 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
 
     checkAllStatuses();
   }, [uniqueRecommendations]);
-
-function getStatusStyle(status) {
-  if (status === 200) {
-    return {
-      liClass: 'p-3 border border-green-500 rounded bg-green-100 flex items-center justify-between',
-      icon: (
-        <div className="tooltip" data-tooltip="Verified Link (HTTP 200)">
-          <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-      ),
-    };
-  } else if (status === 404) {
-    return {
-      liClass: 'p-3 border border-gray-400 rounded bg-gray-200 text-gray-500 flex items-center justify-between',
-      icon: (
-        <div className="tooltip" data-tooltip="Incorrect Link (HTTP 404)">
-          <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </div>
-      ),
-    };
-  } else if (status) {
-    return {
-      liClass: 'p-3 border border-green-300 rounded bg-green-50 text-orange-600 flex items-center justify-between',
-      icon: (
-        <div className="tooltip" data-tooltip={`Link Status: HTTP ${status}`}>
-          <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-      ),
-    };
-  } else {
-    // status null or undefined, loading or error
-    return {
-      liClass: 'p-3 border border-gray-300 rounded bg-gray-50 flex items-center justify-between',
-      icon: null,
-    };
-  }
-}
 
   function isDuplicate(rec) {
     if (!prompt) return false;
@@ -135,7 +80,6 @@ function getStatusStyle(status) {
   // Filter duplicates if showDuplicates is false
   const filteredRecommendations = showDuplicates ? sortedRecommendations : sortedRecommendations.filter(rec => !isDuplicate(rec));
 
-
   return (
     <div className="bg-white">
       <label className="my-4 flex items-center cursor-pointer select-none">
@@ -160,41 +104,55 @@ function getStatusStyle(status) {
         </div>
       </label>
       <ul className="mt-6 space-y-3 relative">
-  {filteredRecommendations.map((rec, index) => {
-    const status = statuses[rec.channel_url];
-    const { liClass, icon } = getStatusStyle(status);
-    const duplicate = isDuplicate(rec);
-    // Tooltip text for status
-    let statusTooltipText = '';
-    if (status === 200) statusTooltipText = 'Verified Link (HTTP 200)';
-    else if (status === 404) statusTooltipText = 'Incorrect Link (HTTP 404)';
-    else if (status) statusTooltipText = `Link Status: HTTP ${status}`;
-    return (
-      <li
-        key={index}
-        className={`${liClass} rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-3 cursor-pointer flex flex-col md:flex-row md:items-center md:justify-between`}
-        role="link"
-        tabIndex={0}
-        onClick={() => window.open(rec.channel_url, '_blank', 'noopener,noreferrer')}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            window.open(rec.channel_url, '_blank', 'noopener,noreferrer');
-          }
-        }}
-      >
-        <span
-          className="text-indigo-700 font-semibold mb-2 md:mb-0"
-          style={{ minWidth: '10rem' }}
-        >
-          {rec.channel_name}
-        </span>
-        <p className="text-gray-700 text-sm italic mb-2 md:mb-0 md:flex-grow md:text-center">{rec.recommendation_reason}</p>
-        <div className="flex items-center space-x-2 flex-shrink-0">
+        {filteredRecommendations.map((rec, index) => {
+          const status = statuses[rec.channel_url];
+          const { liClass, icon } = getStatusStyle(status);
+          const duplicate = isDuplicate(rec);
+          // Tooltip text for status
+          let statusTooltipText = '';
+          if (status === 200) statusTooltipText = 'Verified Link (HTTP 200)';
+          else if (status === 404) statusTooltipText = 'Incorrect Link (HTTP 404)';
+          else if (status) statusTooltipText = `Link Status: HTTP ${status}`;
+          return (
+            <li
+              key={index}
+              className={`${liClass} rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-3 cursor-pointer flex flex-col md:flex-row md:items-center md:justify-between`}
+              role="link"
+              tabIndex={0}
+              onClick={() => window.open(rec.channel_url, '_blank', 'noopener,noreferrer')}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  window.open(rec.channel_url, '_blank', 'noopener,noreferrer');
+                }
+              }}
+            >
+              <span
+                className="text-indigo-700 font-semibold mb-2 md:mb-0"
+                style={{ minWidth: '10rem' }}
+              >
+                {rec.channel_name}
+              </span>
+              <p className="text-gray-700 text-sm italic mb-2 md:mb-0 md:flex-grow md:text-center">{rec.recommendation_reason}</p>
+              <div className="flex items-center space-x-2 flex-shrink-0">
           {/* Status Icon with Tooltip */}
           {icon && (
             <div className="group relative cursor-pointer">
-              {icon}
+              {icon === 'verified' && (
+                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              )}
+              {icon === 'error' && (
+                <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              )}
+              {icon === 'warning' && (
+                <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              )}
               <div
                 className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 inline-block px-4 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700 whitespace-nowrap max-w-[20rem] overflow-hidden text-ellipsis"
                 style={{ bottom: '125%', left: '50%', transform: 'translateX(-50%)' }}
@@ -204,25 +162,24 @@ function getStatusStyle(status) {
               </div>
             </div>
           )}
-          {/* Duplicate Icon with Tooltip */}
-          {duplicate && (
-            <div className="group relative cursor-pointer">
-              {getDuplicateIcon()}
-              <div
-                className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 inline-block px-4 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700 whitespace-nowrap max-w-[20rem] overflow-hidden text-ellipsis"
-                style={{ bottom: '125%', left: '50%', transform: 'translateX(-50%)' }}
-              >
-                Duplicate
-                <div className="tooltip-arrow" data-popper-arrow></div>
+                {/* Duplicate Icon with Tooltip */}
+                {duplicate && (
+                  <div className="group relative cursor-pointer">
+                    {getDuplicateIcon()}
+                    <div
+                      className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 inline-block px-4 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700 whitespace-nowrap max-w-[20rem] overflow-hidden text-ellipsis"
+                      style={{ bottom: '125%', left: '50%', transform: 'translateX(-50%)' }}
+                    >
+                      Duplicate
+                      <div className="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
-          )}
-        </div>
-      </li>
-    );
-  })}
-</ul>
-
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

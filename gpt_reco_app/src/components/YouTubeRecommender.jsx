@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import OpenAI from 'openai';
 import Cookies from 'js-cookie';
 import { z } from 'zod';
@@ -20,7 +20,6 @@ function YouTubeRecommender() {
   const [inputText, setInputText] = useState('');
   const [recommendations, setRecommendations] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [apiKey, setApiKey] = useState('');
   const [numRecommendations, setNumRecommendations] = useState(10);
   const [prompt, setPrompt] = useState('');
 
