@@ -47,7 +47,6 @@ function YouTubeCriticizer({ subscriptions, recommendations }) {
         .map((r) => r.channel_name)
         .join(', ')}\n\nPlease provide a new list of ${recommendations.length} YouTube channel recommendations that are better than the previous list. Each recommendation should include the channel_name, channel_url, and a brief recommendation_reason. Respond ONLY in JSON format as an array of objects.`;
       
-      console.log(prompt)
       const response = await client.responses.parse({
         model: 'gpt-4.1-nano',
         input: [
@@ -59,10 +58,7 @@ function YouTubeCriticizer({ subscriptions, recommendations }) {
         },
       });
 
-      console.log('OpenAI response:', response);
-
       const parsedRecommendations = response.output_parsed.recommendations || [];
-      console.log(parsedRecommendations)
       setImprovedRecommendations(parsedRecommendations);
     } catch (err) {
       setError('Error fetching improved recommendations: ' + err.message);

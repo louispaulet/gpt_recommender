@@ -16,7 +16,6 @@ function HomepageComponent() {
   }, []);
 
   const checkApiKey = async () => {
-    console.log("Starting API key check...");
     setLoading(true);
     setCheckResult(null);
     try {
@@ -25,13 +24,11 @@ function HomepageComponent() {
         dangerouslyAllowBrowser: true
       });
 
-      console.log("Client created, sending request...");
       // Make a simple request to check if the key is valid
       const response = await client.responses.create({
         model: "gpt-4.1-nano",
         input: "Say hello",
       });
-      console.log("Response received:", response);
       if (response && response.output_text) {
         setCheckResult({ message: 'API key is valid.', status: 'success' });
         // Save valid API key to cookie for 30 days
@@ -42,13 +39,11 @@ function HomepageComponent() {
         Cookies.remove('openai_api_key');
       }
     } catch (error) {
-      console.error("Error during API key check:", error);
       setCheckResult({ message: 'API key is invalid or request failed.', status: 'error' });
       // Remove invalid key from cookie if any
       Cookies.remove('openai_api_key');
     } finally {
       setLoading(false);
-      console.log("API key check finished.");
     }
   };
 
