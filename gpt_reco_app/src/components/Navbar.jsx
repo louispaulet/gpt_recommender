@@ -11,7 +11,7 @@ function Navbar() {
               <span role="img" aria-label="thumbs up" className="text-3xl">👍</span>
               <span className="font-bold text-xl text-gray-900">GPT Recommender</span>
             </Link>
-            <div className="hidden md:flex space-x-6">
+            <div className="flex space-x-6">
               <Link to="/" className="text-gray-700 hover:text-blue-600 font-semibold">
                 Home
               </Link>
