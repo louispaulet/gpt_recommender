@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 function YouTubeRecommendationList({ recommendations, prompt }) {
   // Remove duplicate recommendations by channel_url
-  const uniqueRecommendations = [];
-  const seenUrls = new Set();
-  for (const rec of recommendations) {
-    if (!seenUrls.has(rec.channel_url)) {
-      uniqueRecommendations.push(rec);
-      seenUrls.add(rec.channel_url);
+  const uniqueRecommendations = useMemo(() => {
+    const uniqueRecs = [];
+    const seenUrls = new Set();
+    for (const rec of recommendations) {
+      if (!seenUrls.has(rec.channel_url)) {
+        uniqueRecs.push(rec);
+        seenUrls.add(rec.channel_url);
+      }
     }
-  }
+    return uniqueRecs;
+  }, [recommendations]);
 
 
   const [statuses, setStatuses] = useState({});
@@ -23,6 +26,7 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
         const data = await response.json();
         return data.status;
       } catch (error) {
+        console.error('Error fetching URL status:', error);
         return null; // network error or other
       }
     }
@@ -39,7 +43,7 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
     }
 
     checkAllStatuses();
-  }, [recommendations]);
+  }, [uniqueRecommendations]);
 
 function getStatusStyle(status) {
   if (status === 200) {

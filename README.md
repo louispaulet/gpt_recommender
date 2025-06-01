@@ -10,7 +10,8 @@ A React + Vite web application that leverages OpenAI's GPT-4.1-nano model to rec
 - Paste your current YouTube channel subscriptions (names and URLs).
 - Specify the number of new channel recommendations you want.
 - Get AI-generated YouTube channel recommendations in JSON format.
-- View recommendations with live URL status checks (valid, not found, etc.).
+- View recommendations with live URL status checks (valid, not found, etc.) to ensure links are active. This feature uses a custom backend route to fetch the HTTP status of each recommended channel URL and displays status icons for verified, broken, or uncertain links.
+- Use the Criticizer component to get improved and refined YouTube channel recommendations based on your current subscriptions and previous suggestions. This component uses the OpenAI API to critique the initial recommendations and generate a better list, providing reasons for each improved suggestion.
 - Toggle display of duplicate recommendations.
 - Simple and clean UI built with React and TailwindCSS.
 
@@ -57,7 +58,8 @@ A React + Vite web application that leverages OpenAI's GPT-4.1-nano model to rec
 ## Notes
 
 - You need a valid OpenAI API key to use this app.
-- The app uses a CORS proxy to check the status of YouTube channel URLs.
+- The app uses a custom backend route to check the status of YouTube channel URLs, providing real-time validation of recommendation links. Status icons indicate verified links (HTTP 200), broken links (HTTP 404), and other HTTP statuses.
+- The Criticizer component leverages the OpenAI API to generate improved recommendations by critiquing and refining the initial suggestions. It fetches improved recommendations in JSON format, including channel names, URLs, and brief reasons for each recommendation.
 - Recommendations are generated using the GPT-4.1-nano model.
 
 ## License

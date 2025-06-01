@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { z } from 'zod';
 import { zodTextFormat } from 'openai/helpers/zod';
 import YouTubeRecommendationList from './YouTubeRecommendationList';
+import YouTubeCriticizer from './YouTubeCriticizer';
 
 const RecommendationSchema = z.object({
   channel_name: z.string(),
@@ -22,6 +23,15 @@ function YouTubeRecommender() {
   const [apiKey, setApiKey] = useState('');
   const [numRecommendations, setNumRecommendations] = useState(10);
   const [prompt, setPrompt] = useState('');
+
+  // Helper function to parse subscriptions from inputText
+  const parseSubscriptions = (text) => {
+    // Split by new lines, commas, or semicolons, trim spaces, and filter out empty strings
+    return text
+      .split(/[\n,;]+/)
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
+  };
 
   useEffect(() => {
     // Load API key from cookie on mount
@@ -109,7 +119,13 @@ Do NOT recommend a channel that is already present in the input list.`;
       </button>
       {recommendations && (
         Array.isArray(recommendations) ? (
-          <YouTubeRecommendationList recommendations={recommendations} prompt={prompt} />
+          <>
+            <YouTubeRecommendationList recommendations={recommendations} prompt={prompt} />
+            <YouTubeCriticizer
+              subscriptions={parseSubscriptions(inputText)}
+              recommendations={recommendations}
+            />
+          </>
         ) : (
           <pre className="mt-6 p-4 bg-gray-100 border border-gray-300 rounded-lg whitespace-pre-wrap">{recommendations}</pre>
         )

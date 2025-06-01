@@ -4,8 +4,6 @@ import About from './pages/About.jsx';
 import Homepage from './pages/Homepage.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import TermsOfService from './pages/TermsOfService.jsx';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 
 import Navbar from './components/Navbar.jsx';
 
