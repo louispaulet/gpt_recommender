@@ -87,7 +87,7 @@ Do NOT recommend a channel that is already present in the input list.`;
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900">YouTube Channel Recommender</h2>
       <textarea
         rows={5}
-        placeholder="Paste your current YouTube recommendations here (names and URLs if available)"
+        placeholder="Paste your current YouTube subscriptions here (names and URLs if available)"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
         className="w-full p-3 border border-gray-300 rounded-lg mb-6 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
