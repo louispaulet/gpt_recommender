@@ -77,4 +77,4 @@ The repository primarily contains the web application inside the `gpt_reco_app` 
 
 ## License
 
-This project does not specify a license. Please contact the author for usage rights.
+This project is licensed under the [MIT License](LICENSE).
