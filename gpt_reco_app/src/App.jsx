@@ -4,6 +4,7 @@ import About from './pages/About.jsx';
 import Homepage from './pages/Homepage.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import TermsOfService from './pages/TermsOfService.jsx';
+import YouTubeVideoRecommendations from './pages/YouTubeVideoRecommendations.jsx';
 
 import Navbar from './components/Navbar.jsx';
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/video-recommendations" element={<YouTubeVideoRecommendations />} />
         </Routes>
       </main>
       <Footer />
