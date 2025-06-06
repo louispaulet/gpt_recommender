@@ -80,6 +80,10 @@ If not set, it defaults to `https://head-checker.louispaulet13.workers.dev/?url=
 - React Router DOM
 - Zod for schema validation
 
+## Design System
+
+The app uses a custom Tailwind theme defined in `tailwind.config.js`. Brand colors, spacing tokens and the Inter font are shared across pages so the homepage and About page follow the same style.
+
 ## Notes
 
 - You need a valid OpenAI API key to use this app.

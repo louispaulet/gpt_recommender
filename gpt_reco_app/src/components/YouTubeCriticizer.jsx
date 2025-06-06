@@ -62,7 +62,7 @@ function YouTubeCriticizer({ subscriptions, recommendations }) {
       <button
         onClick={getImprovedRecommendations}
         disabled={loading}
-        className="mb-4 w-full py-3 bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
+        className="mb-4 w-full py-3 bg-brand-primary hover:bg-brand-secondary focus:ring-4 focus:ring-brand-secondary text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
       >
         {loading ? 'Loading...' : 'Get Improved Recommendations'}
       </button>
