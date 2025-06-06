@@ -62,34 +62,61 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
 function getStatusStyle(status) {
   if (status === 200) {
     return {
-      liClass: 'p-3 border border-green-500 rounded bg-green-100 flex items-center justify-between',
+      liClass:
+        'p-3 border border-green-600 rounded bg-green-100 text-green-800 flex items-center justify-between',
       icon: (
         <div className="tooltip" data-tooltip="Verified Link (HTTP 200)">
-          <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+          <svg
+            className="w-5 h-5 text-green-700"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
+          <span className="sr-only">Verified Link (HTTP 200)</span>
         </div>
       ),
     };
   } else if (status === 404) {
     return {
-      liClass: 'p-3 border border-gray-400 rounded bg-gray-200 text-gray-500 flex items-center justify-between',
+      liClass:
+        'p-3 border border-gray-500 rounded bg-gray-200 text-gray-800 flex items-center justify-between',
       icon: (
         <div className="tooltip" data-tooltip="Incorrect Link (HTTP 404)">
-          <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+          <svg
+            className="w-5 h-5 text-red-600"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
+          <span className="sr-only">Incorrect Link (HTTP 404)</span>
         </div>
       ),
     };
   } else if (status) {
     return {
-      liClass: 'p-3 border border-green-300 rounded bg-green-50 text-orange-600 flex items-center justify-between',
+      liClass:
+        'p-3 border border-yellow-400 rounded bg-yellow-50 text-yellow-800 flex items-center justify-between',
       icon: (
         <div className="tooltip" data-tooltip={`Link Status: HTTP ${status}`}>
-          <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+          <svg
+            className="w-5 h-5 text-yellow-600"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
+          <span className="sr-only">{`Link Status: HTTP ${status}`}</span>
         </div>
       ),
     };
@@ -113,7 +140,7 @@ function getStatusStyle(status) {
 
   function getDuplicateIcon() {
     return (
-      <span className="text-green-500 ml-2" title="Duplicate" aria-label="Duplicate">&#x267B;</span>
+      <span className="text-green-700 ml-2" title="Duplicate" aria-hidden="true">&#x267B;</span>
     );
   }
 
@@ -207,10 +234,14 @@ function getStatusStyle(status) {
         <div className="flex items-center space-x-2 flex-shrink-0">
           {/* Status Icon with Tooltip */}
           {icon && (
-            <div className="group relative cursor-pointer">
+            <div
+              className="group relative cursor-pointer focus:outline-none"
+              tabIndex={0}
+              aria-label={statusTooltipText}
+            >
               {icon}
               <div
-                className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 inline-block px-4 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700 whitespace-nowrap max-w-[20rem] overflow-hidden text-ellipsis"
+                className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-visible:visible group-focus-visible:opacity-100 inline-block px-4 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700 whitespace-nowrap max-w-[20rem] overflow-hidden text-ellipsis"
                 style={{ bottom: '125%', left: '50%', transform: 'translateX(-50%)' }}
               >
                 {statusTooltipText}
@@ -220,10 +251,14 @@ function getStatusStyle(status) {
           )}
           {/* Duplicate Icon with Tooltip */}
           {duplicate && (
-            <div className="group relative cursor-pointer">
+            <div
+              className="group relative cursor-pointer focus:outline-none"
+              tabIndex={0}
+              aria-label="Duplicate"
+            >
               {getDuplicateIcon()}
               <div
-                className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 inline-block px-4 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700 whitespace-nowrap max-w-[20rem] overflow-hidden text-ellipsis"
+                className="absolute z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-visible:visible group-focus-visible:opacity-100 inline-block px-4 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs tooltip dark:bg-gray-700 whitespace-nowrap max-w-[20rem] overflow-hidden text-ellipsis"
                 style={{ bottom: '125%', left: '50%', transform: 'translateX(-50%)' }}
               >
                 Duplicate
