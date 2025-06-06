@@ -15,6 +15,19 @@ A React + Vite web application that leverages OpenAI's GPT-4.1-nano model to rec
 - Toggle display of duplicate recommendations.
 - Simple and clean UI built with React and TailwindCSS.
 
+## Project Structure
+
+The repository primarily contains the web application inside the `gpt_reco_app` directory.
+
+- `index.html` – minimal entry page referencing `/src/main.jsx`.
+- `src/main.jsx` – mounts the React app and sets up React Router.
+- `src/App.jsx` – defines routes for the homepage, About page, and policies.
+- `src/components/` – key components:
+  - `Homepage.jsx` – stores the OpenAI API key.
+  - `YouTubeRecommender.jsx` – queries OpenAI for channel suggestions.
+  - `YouTubeCriticizer.jsx` – asks OpenAI to refine the first list.
+  - `YouTubeRecommendationList.jsx` – lists results and checks each URL with a Cloudflare worker.
+
 ## Installation
 
 1. Clone the repository:
