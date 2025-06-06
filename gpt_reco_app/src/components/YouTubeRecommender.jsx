@@ -71,14 +71,14 @@ Do NOT recommend a channel that is already present in the input list.`;
   };
 
   return (
-    <section className="max-w-3xl mx-auto p-8 mt-10 bg-white rounded-lg shadow-lg">
+    <section className="max-w-3xl mx-auto p-section mt-10 bg-white rounded-lg shadow-lg">
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900">YouTube Channel Recommender</h2>
       <textarea
         rows={5}
         placeholder="Paste your current YouTube subscriptions here (names and URLs if available)"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
-        className="w-full p-3 border border-gray-300 rounded-lg mb-6 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+        className="w-full p-3 border border-gray-300 rounded-lg mb-6 resize-none focus:outline-none focus:ring-2 focus:ring-brand-light focus:border-brand-light transition"
       />
       <label className="block mb-4 text-gray-700 font-medium">
         Number of recommendations to make:
@@ -87,13 +87,13 @@ Do NOT recommend a channel that is already present in the input list.`;
           min="1"
           value={numRecommendations}
           onChange={(e) => setNumRecommendations(Number(e.target.value))}
-          className="ml-3 p-2 border border-gray-300 rounded w-20 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+          className="ml-3 p-2 border border-gray-300 rounded w-20 focus:outline-none focus:ring-2 focus:ring-brand-light focus:border-brand-light transition"
         />
       </label>
       <button
         onClick={getRecommendations}
         disabled={loading || !inputText}
-        className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
+        className="w-full py-3 bg-brand hover:bg-brand-dark focus:ring-4 focus:ring-brand-light text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
       >
         {loading ? 'Getting Recommendations...' : 'Get Recommendations'}
       </button>

@@ -3,9 +3,9 @@ import React from 'react';
 const About = () => {
   return (
     <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-      <section className="mb-10 p-6 bg-indigo-100 rounded-lg shadow-md text-indigo-900 font-medium text-center text-lg">
+      <section className="mb-10 p-6 bg-brand-light rounded-lg shadow-md text-brand-dark font-medium text-center text-lg">
         <h1 className="text-4xl font-extrabold mb-6">About GPT YouTube Channel Recommender</h1>
-        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-indigo-400 pb-1">
+        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-brand pb-1">
           What is this?
         </h2>
         <p className="text-lg leading-relaxed text-left">
@@ -13,10 +13,10 @@ const About = () => {
         </p>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-indigo-400 pb-1">
+        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-brand pb-1">
           How does it work?
         </h2>
-        <ul className="list-disc list-inside text-indigo-900 text-base leading-relaxed space-y-2">
+        <ul className="list-disc list-inside text-brand-dark text-base leading-relaxed space-y-2">
           <li>Input your <strong>OpenAI API key</strong> securely on the homepage.</li>
           <li>Paste your current YouTube channel subscriptions (names and URLs).</li>
           <li>Specify the number of recommendations you want to receive.</li>
@@ -25,7 +25,7 @@ const About = () => {
         </ul>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-indigo-400 pb-1">
+        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-brand pb-1">
           Why use this app?
         </h2>
         <p className="text-lg leading-relaxed">
@@ -33,7 +33,7 @@ const About = () => {
         </p>
       </section>
       <section>
-        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-indigo-400 pb-1">
+        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-brand pb-1">
           Future Plans 🚀
         </h2>
         <p className="text-lg leading-relaxed">

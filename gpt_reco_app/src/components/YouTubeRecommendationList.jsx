@@ -62,10 +62,10 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
 function getStatusStyle(status) {
   if (status === 200) {
     return {
-      liClass: 'p-3 border border-green-500 rounded bg-green-100 flex items-center justify-between',
+      liClass: 'p-3 border border-accent rounded bg-accent/20 flex items-center justify-between',
       icon: (
         <div className="tooltip" data-tooltip="Verified Link (HTTP 200)">
-          <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+          <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
@@ -84,7 +84,7 @@ function getStatusStyle(status) {
     };
   } else if (status) {
     return {
-      liClass: 'p-3 border border-green-300 rounded bg-green-50 text-orange-600 flex items-center justify-between',
+      liClass: 'p-3 border border-brand-light rounded bg-brand-light/50 text-orange-600 flex items-center justify-between',
       icon: (
         <div className="tooltip" data-tooltip={`Link Status: HTTP ${status}`}>
           <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
@@ -113,7 +113,7 @@ function getStatusStyle(status) {
 
   function getDuplicateIcon() {
     return (
-      <span className="text-green-500 ml-2" title="Duplicate" aria-label="Duplicate">&#x267B;</span>
+      <span className="text-accent ml-2" title="Duplicate" aria-label="Duplicate">&#x267B;</span>
     );
   }
 
@@ -163,7 +163,7 @@ function getStatusStyle(status) {
         />
         <div
           className={`w-12 h-6 rounded-full transition-colors duration-300 ease-in-out ${
-            showDuplicates ? 'bg-indigo-600' : 'bg-gray-300'
+            showDuplicates ? 'bg-brand' : 'bg-gray-300'
           }`}
         >
           <div
@@ -198,7 +198,7 @@ function getStatusStyle(status) {
         }}
       >
         <span
-          className="text-indigo-700 font-semibold mb-2 md:mb-0"
+          className="text-brand font-semibold mb-2 md:mb-0"
           style={{ minWidth: '10rem' }}
         >
           {rec.channel_name}

@@ -87,29 +87,29 @@ function HomepageComponent() {
   };
 
   return (
-    <main className="max-w-3xl mx-auto p-8 bg-white rounded-lg shadow-lg mt-10">
+    <main className="max-w-3xl mx-auto p-section bg-white rounded-lg shadow-lg mt-10">
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900">Set up your OpenAI API key</h2>
       <input
         type="text"
         placeholder="Enter your OpenAI API key"
         value={apiKey}
         onChange={(e) => setApiKey(e.target.value)}
-        className="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+        className="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-brand-light focus:border-brand-light transition"
       />
       <button
         onClick={checkApiKey}
         disabled={loading || !apiKey}
-        className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
+        className="w-full py-3 bg-brand hover:bg-brand-dark focus:ring-4 focus:ring-brand-light text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
       >
         {loading ? 'Checking...' : 'Check and save API Key'}
       </button>
 
       {apiKey && cookieApiKeyLoaded && (
-      <div className="mt-6 flex justify-between items-center bg-green-100 border border-green-400 text-green-900 p-4 rounded-lg">
+      <div className="mt-6 flex justify-between items-center bg-accent/20 border border-accent text-accent p-4 rounded-lg">
         <p className="text-lg font-medium">API key is loaded from cookie.</p>
         <button
           onClick={deleteApiKey}
-          className="ml-4 py-2 px-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition"
+          className="ml-4 py-2 px-4 bg-accent hover:bg-accent/80 text-white font-semibold rounded-lg transition"
         >
           Delete Key
         </button>
@@ -122,14 +122,14 @@ function HomepageComponent() {
             fadeOut ? 'opacity-0' : 'opacity-100'
           } ${
             checkResult.status === 'success'
-              ? 'bg-green-100 text-green-900 border border-green-400'
+              ? 'bg-accent/20 text-accent border border-accent'
               : 'bg-red-100 text-red-900 border border-red-400'
           }`}
           role="alert"
         >
           {checkResult.status === 'success' ? (
             <svg
-              className="w-6 h-6 mr-3 text-green-600"
+              className="w-6 h-6 mr-3 text-accent"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
