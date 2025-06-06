@@ -51,6 +51,18 @@ The repository primarily contains the web application inside the `gpt_reco_app` 
 
 4. Open your browser and navigate to the URL shown in the terminal (usually `http://localhost:5173`).
 
+### Environment Variable
+
+The app checks recommended channel links using a small worker service.
+You can override the default worker URL by setting `VITE_CHANNEL_CHECK_URL`
+before running the dev server or building the project:
+
+```bash
+VITE_CHANNEL_CHECK_URL="https://example.com/?url=" npm run dev
+```
+
+If not set, it defaults to `https://head-checker.louispaulet13.workers.dev/?url=`.
+
 ## Usage
 
 1. On the homepage, enter your OpenAI API key in the provided input field and click "Check API Key" to validate it.

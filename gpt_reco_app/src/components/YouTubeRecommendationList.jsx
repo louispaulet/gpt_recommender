@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
+const CHANNEL_CHECK_URL =
+  import.meta.env.VITE_CHANNEL_CHECK_URL ??
+  'https://head-checker.louispaulet13.workers.dev/?url=';
+
 function YouTubeRecommendationList({ recommendations, prompt }) {
   // Remove duplicate recommendations by channel_url
   const uniqueRecommendations = useMemo(() => {
@@ -20,7 +24,7 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
 
   useEffect(() => {
     async function checkUrlStatus(url) {
-      const proxyUrl = 'https://head-checker.louispaulet13.workers.dev/?url=' + (url);
+      const proxyUrl = CHANNEL_CHECK_URL + url;
       try {
         const response = await fetch(proxyUrl, { method: 'GET' });
         const data = await response.json();
