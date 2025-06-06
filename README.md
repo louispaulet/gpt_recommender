@@ -79,6 +79,25 @@ If not set, it defaults to `https://head-checker.louispaulet13.workers.dev/?url=
 - OpenAI JavaScript SDK
 - React Router DOM
 - Zod for schema validation
+## Tailwind CSS with PostCSS
+
+This project uses Tailwind CSS as a PostCSS plugin. The plugin is loaded in `postcss.config.js` and the base, components, and utilities layers are imported in `src/index.css`.
+
+```js
+export default {
+  plugins: {
+    "@tailwindcss/postcss": {},
+    autoprefixer: {},
+  },
+}
+```
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
 
 ## Notes
 
