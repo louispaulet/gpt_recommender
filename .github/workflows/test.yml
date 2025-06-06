@@ -1,0 +1,21 @@
+name: Run Tests
+
+on:
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+        working-directory: gpt_reco_app
+      - name: Run tests
+        run: npm test
+        working-directory: gpt_reco_app
