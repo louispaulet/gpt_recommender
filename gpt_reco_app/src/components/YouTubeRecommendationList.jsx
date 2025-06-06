@@ -179,9 +179,12 @@ function getStatusStyle(status) {
 
   return (
     <div className="bg-white">
-      <label className="my-4 flex items-center cursor-pointer select-none">
-        <span className="mr-3 text-gray-800 font-semibold">Show Duplicates</span>
+      <div className="my-4 flex items-center cursor-pointer select-none">
+        <label htmlFor="showDuplicatesToggle" className="mr-3 text-gray-800 font-semibold">
+          Show Duplicates
+        </label>
         <input
+          id="showDuplicatesToggle"
           type="checkbox"
           checked={showDuplicates}
           onChange={() => setShowDuplicates(!showDuplicates)}
@@ -199,7 +202,7 @@ function getStatusStyle(status) {
             }`}
           />
         </div>
-      </label>
+      </div>
       <ul className="mt-6 space-y-3 relative">
   {filteredRecommendations.map((rec, index) => {
     const status = statuses[rec.channel_url];

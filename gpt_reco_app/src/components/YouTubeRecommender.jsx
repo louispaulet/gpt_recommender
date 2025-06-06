@@ -73,23 +73,30 @@ Do NOT recommend a channel that is already present in the input list.`;
   return (
     <section className="max-w-3xl mx-auto p-8 mt-10 bg-white rounded-lg shadow-lg">
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900">YouTube Channel Recommender</h2>
+      <label htmlFor="subscriptionsInput" className="block mb-2 text-gray-700 font-medium">
+        Your current subscriptions
+      </label>
       <textarea
+        id="subscriptionsInput"
         rows={5}
         placeholder="Paste your current YouTube subscriptions here (names and URLs if available)"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
         className="w-full p-3 border border-gray-300 rounded-lg mb-6 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
       />
-      <label className="block mb-4 text-gray-700 font-medium">
-        Number of recommendations to make:
+      <div className="mb-4">
+        <label htmlFor="numRecommendationsInput" className="block mb-2 text-gray-700 font-medium">
+          Number of recommendations to make:
+        </label>
         <input
+          id="numRecommendationsInput"
           type="number"
           min="1"
           value={numRecommendations}
           onChange={(e) => setNumRecommendations(Number(e.target.value))}
-          className="ml-3 p-2 border border-gray-300 rounded w-20 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+          className="p-2 border border-gray-300 rounded w-20 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
         />
-      </label>
+      </div>
       <button
         onClick={getRecommendations}
         disabled={loading || !inputText}

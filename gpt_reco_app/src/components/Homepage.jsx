@@ -7,7 +7,6 @@ function HomepageComponent() {
   const [cookieApiKeyLoaded, setCookieApiKeyLoaded] = useState(false);
   const [checkResult, setCheckResult] = useState(null); // { message: string, status: 'success' | 'error' }
   const [loading, setLoading] = useState(false);
-  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     // Load API key from cookie on mount
@@ -21,7 +20,6 @@ function HomepageComponent() {
   const checkApiKey = async () => {
     setLoading(true);
     setCheckResult(null);
-    setFadeOut(false);
     try {
       const client = new OpenAI({
         apiKey: apiKey,
@@ -44,27 +42,11 @@ function HomepageComponent() {
         Cookies.remove('openai_api_key');
         setCookieApiKeyLoaded(false);
       }
-      // Start fade away effect at 2.5 seconds, clear message at 3 seconds
-      setTimeout(() => {
-        setFadeOut(true);
-      }, 2500);
-      setTimeout(() => {
-        setCheckResult(null);
-        setFadeOut(false);
-      }, 3000);
     } catch (error) {
       setCheckResult({ message: `API key is invalid or request failed: ${error.message}`, status: 'error' });
       // Remove invalid key from cookie if any
       Cookies.remove('openai_api_key');
       setCookieApiKeyLoaded(false);
-      // Start fade away effect at 2.5 seconds, clear message at 3 seconds
-      setTimeout(() => {
-        setFadeOut(true);
-      }, 2500);
-      setTimeout(() => {
-        setCheckResult(null);
-        setFadeOut(false);
-      }, 3000);
     } finally {
       setLoading(false);
     }
@@ -75,21 +57,16 @@ function HomepageComponent() {
     setApiKey('');
     setCheckResult({ message: 'API key deleted.', status: 'success' });
     setCookieApiKeyLoaded(false);
-    setFadeOut(false);
-    // Start fade away effect at 2.5 seconds, clear message at 3 seconds
-    setTimeout(() => {
-      setFadeOut(true);
-    }, 2500);
-    setTimeout(() => {
-      setCheckResult(null);
-      setFadeOut(false);
-    }, 3000);
   };
 
   return (
     <main className="max-w-3xl mx-auto p-8 bg-white rounded-lg shadow-lg mt-10">
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900">Set up your OpenAI API key</h2>
+      <label htmlFor="apiKeyInput" className="block mb-2 text-gray-700 font-medium">
+        OpenAI API key
+      </label>
       <input
+        id="apiKeyInput"
         type="text"
         placeholder="Enter your OpenAI API key"
         value={apiKey}
@@ -117,10 +94,8 @@ function HomepageComponent() {
       )}
 
       {checkResult && (
-        <p
-          className={`mt-6 p-4 rounded-lg flex items-center text-lg font-medium transition-opacity duration-500 ${
-            fadeOut ? 'opacity-0' : 'opacity-100'
-          } ${
+        <div
+          className={`mt-6 p-4 rounded-lg flex items-center text-lg font-medium ${
             checkResult.status === 'success'
               ? 'bg-green-100 text-green-900 border border-green-400'
               : 'bg-red-100 text-red-900 border border-red-400'
@@ -148,8 +123,14 @@ function HomepageComponent() {
               <path d="M10 8.586l4.95-4.95 1.414 1.414L11.414 10l4.95 4.95-1.414 1.414L10 11.414l-4.95 4.95-1.414-1.414L8.586 10 3.636 5.05l1.414-1.414L10 8.586z" />
             </svg>
           )}
-          {checkResult.message}
-        </p>
+          <span className="flex-grow">{checkResult.message}</span>
+          <button
+            onClick={() => setCheckResult(null)}
+            className="ml-4 text-sm font-semibold text-gray-700 hover:underline"
+          >
+            Dismiss
+          </button>
+        </div>
       )}
     </main>
   );
