@@ -79,17 +79,19 @@ If not set, it defaults to `https://head-checker.louispaulet13.workers.dev/?url=
 - OpenAI JavaScript SDK
 - React Router DOM
 - Zod for schema validation
-## Tailwind CSS with PostCSS
+## Tailwind CSS with the Vite plugin
 
-This project uses Tailwind CSS as a PostCSS plugin. The plugin is loaded in `postcss.config.js` and the base, components, and utilities layers are imported in `src/index.css`.
+Tailwind CSS is integrated using the official Vite plugin. The plugin is added in `vite.config.js` and the Tailwind layers are imported in `src/index.css`.
 
 ```js
-export default {
-  plugins: {
-    "@tailwindcss/postcss": {},
-    autoprefixer: {},
-  },
-}
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react-swc'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  base: '/',
+  plugins: [react(), tailwindcss()],
+})
 ```
 
 ```css
