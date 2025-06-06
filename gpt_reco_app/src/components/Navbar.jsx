@@ -20,7 +20,12 @@ function Navbar() {
               </Link>
             </div>
           </div>
-          <div></div>
+          <a
+            href="#get-started"
+            className="px-4 py-2 rounded-lg bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition"
+          >
+            Get Started
+          </a>
         </div>
       </div>
     </nav>
