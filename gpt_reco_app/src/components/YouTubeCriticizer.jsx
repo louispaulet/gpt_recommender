@@ -1,20 +1,9 @@
 import React, { useState } from 'react';
 import OpenAI from 'openai';
 import YouTubeRecommendationList from './YouTubeRecommendationList.jsx';
-import { z } from 'zod';
-import Cookies from 'js-cookie';
 import { zodTextFormat } from 'openai/helpers/zod';
+import { RecommendationsResponse, getOpenAIApiKey } from '../utils/openaiHelpers.js';
 
-// Define the recommendation type schema using zod
-const RecommendationSchema = z.object({
-  channel_name: z.string(),
-  channel_url: z.string(),
-  recommendation_reason: z.string(),
-});
-
-const RecommendationsResponse = z.object({
-  recommendations: z.array(RecommendationSchema),
-});
 
 function YouTubeCriticizer({ subscriptions, recommendations }) {
   const [improvedRecommendations, setImprovedRecommendations] = useState([]);
@@ -24,7 +13,7 @@ function YouTubeCriticizer({ subscriptions, recommendations }) {
   // Load API key from cookie on mount
   const [openaiApiKey, setOpenaiApiKey] = React.useState('');
   React.useEffect(() => {
-    const savedKey = Cookies.get('openai_api_key');
+    const savedKey = getOpenAIApiKey();
     if (savedKey) {
       setOpenaiApiKey(savedKey);
     }

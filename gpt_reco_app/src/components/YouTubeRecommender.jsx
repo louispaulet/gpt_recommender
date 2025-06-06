@@ -1,21 +1,9 @@
 import React, { useState } from 'react';
 import OpenAI from 'openai';
-import Cookies from 'js-cookie';
-import { z } from 'zod';
 import { zodTextFormat } from 'openai/helpers/zod';
 import YouTubeRecommendationList from './YouTubeRecommendationList';
 import YouTubeCriticizer from './YouTubeCriticizer';
-
-const RecommendationSchema = z.object({
-  channel_name: z.string(),
-  channel_url: z.string(),
-  recommendation_reason: z.string(),
-});
-
-const RecommendationsResponse = z.object({
-  recommendations: z.array(RecommendationSchema),
-});
-
+import { RecommendationsResponse, getOpenAIApiKey } from '../utils/openaiHelpers.js';
 function YouTubeRecommender() {
   const [inputText, setInputText] = useState('');
   const [recommendations, setRecommendations] = useState(null);
@@ -33,7 +21,7 @@ function YouTubeRecommender() {
   };
 
   const getRecommendations = async () => {
-    const currentApiKey = Cookies.get('openai_api_key');
+    const currentApiKey = getOpenAIApiKey();
     if (!currentApiKey) {
       setRecommendations('API key not found. Please set your OpenAI API key in the homepage.');
       return;
