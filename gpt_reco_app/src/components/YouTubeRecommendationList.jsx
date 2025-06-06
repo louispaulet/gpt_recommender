@@ -32,14 +32,24 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
     }
 
     async function checkAllStatuses() {
-      // Update statuses incrementally as each fetch completes
-      for (const rec of uniqueRecommendations) {
-        const status = await checkUrlStatus(rec.channel_url);
-        setStatuses(prevStatuses => ({
-          ...prevStatuses,
-          [rec.channel_url]: status,
-        }));
-      }
+      const statusPromises = uniqueRecommendations.map(async (rec) => {
+        try {
+          const status = await checkUrlStatus(rec.channel_url);
+          return { url: rec.channel_url, status };
+        } catch (error) {
+          console.error('Error checking status for', rec.channel_url, error);
+          return { url: rec.channel_url, status: null };
+        }
+      });
+
+      const results = await Promise.all(statusPromises);
+      setStatuses((prevStatuses) => {
+        const merged = { ...prevStatuses };
+        results.forEach(({ url, status }) => {
+          merged[url] = status;
+        });
+        return merged;
+      });
     }
 
     checkAllStatuses();
