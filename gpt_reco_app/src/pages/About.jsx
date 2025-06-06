@@ -2,8 +2,8 @@ import React from 'react';
 
 const About = () => {
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-      <section className="mb-10 p-6 bg-indigo-100 rounded-lg shadow-md text-indigo-900 font-medium text-center text-lg">
+    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+      <section className="mb-10 p-6 bg-indigo-100 rounded-lg shadow-sm text-indigo-900 font-medium text-center text-lg">
         <h1 className="text-4xl font-extrabold mb-6">About GPT YouTube Channel Recommender</h1>
         <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-indigo-400 pb-1">
           What is this?

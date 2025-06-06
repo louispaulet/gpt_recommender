@@ -87,7 +87,7 @@ function HomepageComponent() {
   };
 
   return (
-    <main className="max-w-3xl mx-auto p-8 bg-white rounded-lg shadow-lg mt-10">
+    <main className="max-w-2xl mx-auto p-8 bg-white rounded-lg shadow-md mt-10">
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900">Set up your OpenAI API key</h2>
       <input
         type="text"

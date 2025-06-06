@@ -57,7 +57,7 @@ function YouTubeCriticizer({ subscriptions, recommendations }) {
   };
 
   return (
-    <div className="mt-8 p-6 bg-gray-50 rounded-lg shadow-md">
+    <div className="mt-8 p-6 bg-gray-50 rounded-lg shadow-sm">
       <h2 className="text-2xl font-semibold mb-4">Criticizer: Get Better Recommendations</h2>
       <button
         onClick={getImprovedRecommendations}
