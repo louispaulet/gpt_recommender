@@ -9,7 +9,7 @@ function Homepage() {
         GPT YouTube Channel Recommender
       </h1>
       <section className="mb-10 p-6 bg-primary-100 rounded-lg shadow-md text-primary-900 font-medium text-center text-lg">
-        Input your current YouTube subscriptions, and get a curated new channel recommendation list!
+        Input your current YouTube subscriptions, and get a curated recommendation list!
       </section>
       <HomepageComponent />
       <div className="mt-12">
