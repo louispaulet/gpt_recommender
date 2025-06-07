@@ -16,6 +16,24 @@
 .font-playfair-display {
   font-family: 'Playfair Display', serif;
 }
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Oswald", sans-serif;
+}
+
+.font-primary {
+  font-family: "Poppins", sans-serif;
+}
+.font-secondary {
+  font-family: "Oswald", sans-serif;
+}
+.font-accent {
+  font-family: "Playfair Display", serif;
+}
+
 
 /* Primary color palette mirroring Tailwind's indigo */
 :root {
