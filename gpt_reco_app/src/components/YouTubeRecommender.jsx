@@ -78,7 +78,7 @@ Do NOT recommend a channel that is already present in the input list.`;
         placeholder="Paste your current YouTube subscriptions here (names and URLs if available)"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
-        className="w-full p-3 border border-gray-300 rounded-lg mb-6 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+        className="w-full p-3 border border-gray-300 rounded-lg mb-6 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
       />
       <label className="block mb-4 text-gray-700 font-medium">
         Number of recommendations to make:
@@ -87,13 +87,13 @@ Do NOT recommend a channel that is already present in the input list.`;
           min="1"
           value={numRecommendations}
           onChange={(e) => setNumRecommendations(Number(e.target.value))}
-          className="ml-3 p-2 border border-gray-300 rounded w-20 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+          className="ml-3 p-2 border border-gray-300 rounded w-20 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
         />
       </label>
       <button
         onClick={getRecommendations}
         disabled={loading || !inputText}
-        className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
+        className="w-full py-3 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
       >
         {loading ? 'Getting Recommendations...' : 'Get Recommendations'}
       </button>
