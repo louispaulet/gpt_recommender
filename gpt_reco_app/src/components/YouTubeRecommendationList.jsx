@@ -190,7 +190,7 @@ function getStatusStyle(status) {
         />
         <div
           className={`w-12 h-6 rounded-full transition-colors duration-300 ease-in-out ${
-            showDuplicates ? 'bg-indigo-600' : 'bg-gray-300'
+            showDuplicates ? 'bg-primary-600' : 'bg-gray-300'
           }`}
         >
           <div
@@ -225,7 +225,7 @@ function getStatusStyle(status) {
         }}
       >
         <span
-          className="text-indigo-700 font-semibold mb-2 md:mb-0"
+          className="text-primary-700 font-semibold mb-2 md:mb-0"
           style={{ minWidth: '10rem' }}
         >
           {rec.channel_name}
