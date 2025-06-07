@@ -94,12 +94,12 @@ function HomepageComponent() {
         placeholder="Enter your OpenAI API key"
         value={apiKey}
         onChange={(e) => setApiKey(e.target.value)}
-        className="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
+        className="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
       />
       <button
         onClick={checkApiKey}
         disabled={loading || !apiKey}
-        className="w-full py-3 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
+        className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
       >
         {loading ? 'Checking...' : 'Check and save API Key'}
       </button>
