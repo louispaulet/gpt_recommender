@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FiCopy, FiUpload } from 'react-icons/fi';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function parseSubscriptions(html) {
@@ -52,8 +53,12 @@ const HtmlSubscriptionImporter = () => {
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg space-y-6">
-      <label htmlFor="subscription-file" className="block text-lg font-medium text-gray-700">
-        Upload subscriptions HTML file
+      <label
+        htmlFor="subscription-file"
+        className="block text-lg font-medium text-gray-700 flex items-center space-x-2"
+      >
+        <FiUpload className="text-primary-600" />
+        <span>Upload subscriptions HTML file</span>
       </label>
       <input
         id="subscription-file"
@@ -76,9 +81,10 @@ const HtmlSubscriptionImporter = () => {
           <button
             type="button"
             onClick={copyToClipboard}
-            className="w-full py-2 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 text-white font-semibold rounded-lg transition"
+            className="w-full py-2 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 text-white font-semibold rounded-lg transition flex items-center justify-center space-x-2"
           >
-            {copied ? 'Copied!' : 'Copy to Clipboard'}
+            <FiCopy />
+            <span>{copied ? 'Copied!' : 'Copy to Clipboard'}</span>
           </button>
         </div>
       )}
