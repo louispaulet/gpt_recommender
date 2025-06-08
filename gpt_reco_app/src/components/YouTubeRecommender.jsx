@@ -11,6 +11,7 @@ function YouTubeRecommender() {
   const [loading, setLoading] = useState(false);
   const [numRecommendations, setNumRecommendations] = useState(10);
   const [prompt, setPrompt] = useState('');
+  const [topics, setTopics] = useState('');
 
   // Helper function to parse subscriptions from inputText
   const parseSubscriptions = (text) => {
@@ -35,14 +36,19 @@ function YouTubeRecommender() {
         dangerouslyAllowBrowser: true,
       });
 
+      const topicLine = topics.trim()
+        ? `Consider these preferred topics or keywords when making recommendations: ${topics}.`
+        : '';
+
       const newPrompt = `
 Based on the following list of YouTube recommendations, please suggest ${numRecommendations} new YouTube channels to watch.
+${topicLine}
 The input list of subscribed channels:
 
 ${inputText}
 
-Please respond ONLY in JSON format with a list of recommendations. 
-Each recommendation should have the following fields: 
+Please respond ONLY in JSON format with a list of recommendations.
+Each recommendation should have the following fields:
 "channel_name" (string), "channel_url" (string) where the URL is formatted as "https://www.youtube.com/@" + slug of the channel name,
 and "recommendation_reason" (string) which is a single short sentence explaining why this channel is recommended.
 
@@ -89,6 +95,16 @@ Do NOT recommend a channel that is already present in the input list.`;
           value={numRecommendations}
           onChange={(e) => setNumRecommendations(Number(e.target.value))}
           className="ml-3 p-2 border border-gray-300 rounded w-20 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
+        />
+      </label>
+      <label className="block mb-4 text-gray-700 font-medium">
+        Preferred topics or keywords:
+        <input
+          type="text"
+          placeholder="e.g. technology, cooking"
+          value={topics}
+          onChange={(e) => setTopics(e.target.value)}
+          className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
         />
       </label>
       <button
