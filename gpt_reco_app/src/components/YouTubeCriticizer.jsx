@@ -3,6 +3,7 @@ import OpenAI from 'openai';
 import YouTubeRecommendationList from './YouTubeRecommendationList.jsx';
 import { zodTextFormat } from 'openai/helpers/zod';
 import { RecommendationsResponse, getOpenAIApiKey } from '../utils/openaiHelpers.js';
+import Spinner from './Spinner.jsx';
 
 
 function YouTubeCriticizer({ subscriptions, recommendations }) {
@@ -62,9 +63,16 @@ function YouTubeCriticizer({ subscriptions, recommendations }) {
       <button
         onClick={getImprovedRecommendations}
         disabled={loading}
-        className="mb-4 w-full py-3 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
+        className="mb-4 w-full py-3 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center justify-center"
       >
-        {loading ? 'Loading...' : 'Get Improved Recommendations'}
+        {loading ? (
+          <>
+            <Spinner />
+            Loading...
+          </>
+        ) : (
+          'Get Improved Recommendations'
+        )}
       </button>
       {error && <p className="text-red-600 mb-4">{error}</p>}
       {improvedRecommendations.length > 0 && (
