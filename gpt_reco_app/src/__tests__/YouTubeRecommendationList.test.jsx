@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { test, expect, vi } from 'vitest';
+import { afterEach, test, expect, vi } from 'vitest';
 import YouTubeRecommendationList from '../components/YouTubeRecommendationList.jsx';
 
 const recs = [
@@ -10,6 +10,8 @@ const recs = [
 ];
 
 globalThis.fetch = vi.fn(() => Promise.resolve({ json: () => Promise.resolve({ status: 200 }) }));
+
+afterEach(() => vi.restoreAllMocks());
 
 test('handles duplicate toggle', async () => {
   render(<YouTubeRecommendationList recommendations={recs} prompt="A" />);
