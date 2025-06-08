@@ -9,6 +9,7 @@ A React + Vite web application that leverages OpenAI's GPT-4.1-nano model to rec
 - Input and validate your OpenAI API key directly in the app.
 - Paste your current YouTube channel subscriptions (names and URLs).
 - Specify the number of new channel recommendations you want.
+- Filter recommendations by entering preferred topics or keywords.
 - Get AI-generated YouTube channel recommendations in JSON format.
 - View recommendations with live URL status checks (valid, not found, etc.) to ensure links are active. This feature uses a custom backend route to fetch the HTTP status of each recommended channel URL and displays status icons for verified, broken, or uncertain links.
 - Use the Criticizer component to get improved and refined YouTube channel recommendations based on your current subscriptions and previous suggestions. This component uses the OpenAI API to critique the initial recommendations and generate a better list, providing reasons for each improved suggestion.
@@ -68,8 +69,9 @@ If not set, it defaults to `https://head-checker.louispaulet13.workers.dev/?url=
 1. On the homepage, enter your OpenAI API key in the provided input field and click "Check API Key" to validate it.
 2. Paste your current YouTube channel subscriptions (names and URLs) into the text area.
 3. Specify how many new channel recommendations you want.
-4. Click "Get Recommendations" to fetch AI-generated YouTube channel suggestions.
-5. View the list of recommended channels with status indicators and links.
+4. (Optional) Enter your preferred topics or keywords to guide the recommendations.
+5. Click "Get Recommendations" to fetch AI-generated YouTube channel suggestions.
+6. View the list of recommended channels with status indicators and links.
 
 ## Technologies Used
 
