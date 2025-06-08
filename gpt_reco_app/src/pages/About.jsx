@@ -2,10 +2,10 @@ import React from 'react';
 
 const About = () => {
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto font-secondary">
       <section className="mb-10 p-6 bg-primary-100 rounded-lg shadow-md text-primary-900 font-medium text-center text-lg">
-        <h1 className="text-4xl font-extrabold mb-6">About GPT YouTube Channel Recommender</h1>
-        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-primary-400 pb-1">
+        <h1 className="text-4xl font-extrabold mb-6 font-primary">About GPT YouTube Channel Recommender</h1>
+        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-primary-400 pb-1 font-primary">
           What is this?
         </h2>
         <p className="text-lg leading-relaxed text-left">
@@ -13,7 +13,7 @@ const About = () => {
         </p>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-primary-400 pb-1">
+        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-primary-400 pb-1 font-primary">
           How does it work?
         </h2>
         <ul className="list-disc list-inside text-primary-900 text-base leading-relaxed space-y-2">
@@ -25,7 +25,7 @@ const About = () => {
         </ul>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-primary-400 pb-1">
+        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-primary-400 pb-1 font-primary">
           Why use this app?
         </h2>
         <p className="text-lg leading-relaxed">
@@ -33,7 +33,7 @@ const About = () => {
         </p>
       </section>
       <section>
-        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-primary-400 pb-1">
+        <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-primary-400 pb-1 font-primary">
           Future Plans 🚀
         </h2>
         <p className="text-lg leading-relaxed">
