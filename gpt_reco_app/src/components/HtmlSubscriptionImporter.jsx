@@ -22,6 +22,7 @@ export function parseSubscriptions(html) {
 
 const HtmlSubscriptionImporter = () => {
   const [results, setResults] = useState([]);
+  const [copied, setCopied] = useState(false);
 
   const handleFileChange = (e) => {
     const file = e.target.files && e.target.files[0];
@@ -35,6 +36,20 @@ const HtmlSubscriptionImporter = () => {
     reader.readAsText(file);
   };
 
+  const csv = results
+    .map((r) => `"${r.name.replace(/"/g, '""')}",${r.url}`)
+    .join('\n');
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(csv);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* noop */
+    }
+  };
+
   return (
     <div className="space-y-6">
       <input
@@ -44,15 +59,21 @@ const HtmlSubscriptionImporter = () => {
         className="block w-full text-sm text-gray-700"
       />
       {results.length > 0 && (
-        <ul className="list-disc pl-6">
-          {results.map((r) => (
-            <li key={r.url}>
-              <a href={r.url} className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
-                {r.name}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="space-y-4">
+          <textarea
+            readOnly
+            value={csv}
+            rows={Math.min(10, results.length + 1)}
+            className="w-full border border-gray-300 p-2 font-mono text-sm"
+          />
+          <button
+            type="button"
+            onClick={copyToClipboard}
+            className="px-4 py-2 bg-blue-600 text-white rounded"
+          >
+            {copied ? 'Copied!' : 'Copy to Clipboard'}
+          </button>
+        </div>
       )}
     </div>
   );

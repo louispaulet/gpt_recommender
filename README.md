@@ -22,7 +22,7 @@ channel recommendations.
   OpenAI API to critique the initial recommendations and generate a better list, providing
   reasons for each improved suggestion.
 - Toggle display of duplicate recommendations.
-- Import a saved YouTube subscriptions HTML file to extract channel names and links.
+- Import a saved YouTube subscriptions HTML file to extract channel names and links as a copyable CSV block.
 - Simple and clean UI built with React and TailwindCSS.
 
 ## Project Structure
@@ -116,6 +116,8 @@ python scripts/extract_subs_from_html.py path/to/YouTube.html
 ```
 
 The script prints each channel name followed by its URL, separated by a tab.
+
+In the web app, the channels are shown as a CSV block with a one-click copy button.
 
 
 ## Technologies Used
