@@ -5,7 +5,7 @@ import Footer from '../components/Footer.jsx';
 
 test('renders privacy and terms links', () => {
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Footer />
     </MemoryRouter>
   );
