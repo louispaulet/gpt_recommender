@@ -22,6 +22,7 @@ channel recommendations.
   OpenAI API to critique the initial recommendations and generate a better list, providing
   reasons for each improved suggestion.
 - Toggle display of duplicate recommendations.
+- Import a saved YouTube subscriptions HTML file to extract channel names and links.
 - Simple and clean UI built with React and TailwindCSS.
 
 ## Project Structure
@@ -108,8 +109,7 @@ From within the `gpt_reco_app` directory you can:
 
 ## Extracting Subscriptions from HTML
 
-Save your YouTube subscriptions page with `Ctrl+S` and run the helper script to
-pull channel names and URLs:
+Save your YouTube subscriptions page with `Ctrl+S` and either use the "Import HTML" page in the app or run the helper script below to pull channel names and URLs:
 
 ```bash
 python scripts/extract_subs_from_html.py path/to/YouTube.html
