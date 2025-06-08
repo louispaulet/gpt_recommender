@@ -1,8 +1,11 @@
 # GPT YouTube Channel Recommender
 
-[![Main Illustration](default_screenshot.png)](default_screenshot.png)
+[![Screenshot of the GPT YouTube Channel Recommender interface](default_screenshot.png)](default_screenshot.png)
 
-A React + Vite web application that leverages OpenAI's GPT-4.1-nano model to recommend new YouTube channels based on your current subscriptions. Input your OpenAI API key and a list of your subscribed channels to receive personalized channel recommendations.
+A React + Vite web application that leverages OpenAI's GPT-4.1-nano model to
+recommend new YouTube channels based on your current subscriptions. Input your
+OpenAI API key and a list of your subscribed channels to receive personalized
+channel recommendations.
 
 ## Features
 
@@ -11,8 +14,13 @@ A React + Vite web application that leverages OpenAI's GPT-4.1-nano model to rec
 - Specify the number of new channel recommendations you want.
 - Filter recommendations by entering preferred topics or keywords.
 - Get AI-generated YouTube channel recommendations in JSON format.
-- View recommendations with live URL status checks (valid, not found, etc.) to ensure links are active. This feature uses a custom backend route to fetch the HTTP status of each recommended channel URL and displays status icons for verified, broken, or uncertain links.
-- Use the Criticizer component to get improved and refined YouTube channel recommendations based on your current subscriptions and previous suggestions. This component uses the OpenAI API to critique the initial recommendations and generate a better list, providing reasons for each improved suggestion.
+- View recommendations with live URL status checks (valid, not found, etc.) to ensure links are active.
+  This feature uses a custom backend route to fetch the HTTP status of each recommended
+  channel URL and displays status icons for verified, broken, or uncertain links.
+- Use the Criticizer component to get improved and refined YouTube channel recommendations
+  based on your current subscriptions and previous suggestions. This component uses the
+  OpenAI API to critique the initial recommendations and generate a better list, providing
+  reasons for each improved suggestion.
 - Toggle display of duplicate recommendations.
 - Simple and clean UI built with React and TailwindCSS.
 
@@ -68,7 +76,8 @@ If not set, it defaults to `https://head-checker.louispaulet13.workers.dev/?url=
 
 ## Linting, Building, and Testing
 
-The `gpt_reco_app/package.json` file defines handy scripts for common development tasks. From within the `gpt_reco_app` directory you can:
+The `gpt_reco_app/package.json` file defines handy scripts for common development tasks.
+From within the `gpt_reco_app` directory you can:
 
 - **Lint** the codebase with **ESLint**:
 
@@ -107,7 +116,8 @@ The `gpt_reco_app/package.json` file defines handy scripts for common developmen
 - Zod for schema validation
 ## Tailwind CSS with the Vite plugin
 
-Tailwind CSS is integrated using the official Vite plugin. The plugin is added in `vite.config.js` and the Tailwind layers are imported in `src/index.css`.
+Tailwind CSS is integrated using the official Vite plugin. The plugin is added in
+`vite.config.js` and the Tailwind layers are imported in `src/index.css`.
 
 ```js
 import { defineConfig } from 'vite'
@@ -130,8 +140,12 @@ export default defineConfig({
 ## Notes
 
 - You need a valid OpenAI API key to use this app.
-- The app uses a custom backend route to check the status of YouTube channel URLs, providing real-time validation of recommendation links. Status icons indicate verified links (HTTP 200), broken links (HTTP 404), and other HTTP statuses.
-- The Criticizer component leverages the OpenAI API to generate improved recommendations by critiquing and refining the initial suggestions. It fetches improved recommendations in JSON format, including channel names, URLs, and brief reasons for each recommendation.
+- The app uses a custom backend route to check the status of YouTube channel URLs,
+  providing real-time validation of recommendation links. Status icons indicate
+  verified links (HTTP 200), broken links (HTTP 404), and other HTTP statuses.
+- The Criticizer component leverages the OpenAI API to generate improved recommendations
+  by critiquing and refining the initial suggestions. It fetches improved recommendations
+  in JSON format, including channel names, URLs, and brief reasons for each recommendation.
 - Recommendations are generated using the GPT-4.1-nano model.
 
 ## License
