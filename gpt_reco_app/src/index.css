@@ -1,22 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;600&family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Oswald:wght@400;600&family=Playfair+Display:wght@400;700&display=swap');
 @import "tailwindcss";
 
 .font-playfair-display {
   font-family: 'Playfair Display', serif;
 }
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Oswald", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Source Sans 3", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .font-primary {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .font-secondary {
-  font-family: "Source Sans 3", sans-serif;
+  font-family: "Oswald", sans-serif;
 }
 .font-accent {
   font-family: "Playfair Display", serif;

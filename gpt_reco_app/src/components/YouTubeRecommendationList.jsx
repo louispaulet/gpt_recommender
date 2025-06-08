@@ -178,7 +178,7 @@ function getStatusStyle(status) {
 
 
   return (
-    <div className="bg-white font-primary">
+    <div className="bg-white font-secondary">
       <label className="my-4 flex items-center cursor-pointer select-none">
         <span className="mr-3 text-gray-800 font-semibold font-secondary">Show Duplicates</span>
         <input
