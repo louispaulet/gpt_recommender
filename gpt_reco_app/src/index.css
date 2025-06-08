@@ -1,9 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;600&family=Bebas+Neue&family=Oswald:wght@400;600&family=Playfair+Display:wght@400;700&display=swap');
 @import "tailwindcss";
 
 .font-montserrat {
   font-family: 'Montserrat', sans-serif;
 }
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+.font-bebas-neue {
+  font-family: 'Bebas Neue', sans-serif;
+}
+.font-oswald {
+  font-family: 'Oswald', sans-serif;
+}
+.font-playfair-display {
+  font-family: 'Playfair Display', serif;
+}
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Oswald", sans-serif;
+}
+
+.font-primary {
+  font-family: "Poppins", sans-serif;
+}
+.font-secondary {
+  font-family: "Oswald", sans-serif;
+}
+.font-accent {
+  font-family: "Playfair Display", serif;
+}
+
 
 /* Primary color palette mirroring Tailwind's indigo */
 :root {
