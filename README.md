@@ -52,6 +52,8 @@ The repository primarily contains the web application inside the `gpt_reco_app` 
 
 4. Open your browser and navigate to the URL shown in the terminal (usually `http://localhost:5173`).
 
+**Note:** This project targets **Node.js 18**, matching the CI workflow.
+
 ### Environment Variable
 
 The app checks recommended channel links using a small worker service.
