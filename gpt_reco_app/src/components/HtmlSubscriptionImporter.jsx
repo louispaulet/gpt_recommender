@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FiCopy, FiUpload } from 'react-icons/fi';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function parseSubscriptions(html) {
@@ -51,27 +52,39 @@ const HtmlSubscriptionImporter = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="p-6 bg-white rounded-lg shadow-lg space-y-6">
+      <label
+        htmlFor="subscription-file"
+        className="block text-lg font-medium text-gray-700 flex items-center space-x-2"
+      >
+        <FiUpload className="text-primary-600" />
+        <span>Upload subscriptions HTML file</span>
+      </label>
       <input
+        id="subscription-file"
         type="file"
         accept="text/html"
         onChange={handleFileChange}
-        className="block w-full text-sm text-gray-700"
+        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
       />
       {results.length > 0 && (
         <div className="space-y-4">
+          <p className="text-sm text-gray-700">
+            {results.length} channels detected. Copy the CSV below:
+          </p>
           <textarea
             readOnly
             value={csv}
             rows={Math.min(10, results.length + 1)}
-            className="w-full border border-gray-300 p-2 font-mono text-sm"
+            className="w-full p-3 border border-gray-300 rounded-lg font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           />
           <button
             type="button"
             onClick={copyToClipboard}
-            className="px-4 py-2 bg-blue-600 text-white rounded"
+            className="w-full py-2 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 text-white font-semibold rounded-lg transition flex items-center justify-center space-x-2"
           >
-            {copied ? 'Copied!' : 'Copy to Clipboard'}
+            <FiCopy />
+            <span>{copied ? 'Copied!' : 'Copy to Clipboard'}</span>
           </button>
         </div>
       )}
