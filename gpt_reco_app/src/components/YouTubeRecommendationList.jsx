@@ -178,9 +178,9 @@ function getStatusStyle(status) {
 
 
   return (
-    <div className="bg-white">
+    <div className="bg-white font-primary">
       <label className="my-4 flex items-center cursor-pointer select-none">
-        <span className="mr-3 text-gray-800 font-semibold">Show Duplicates</span>
+        <span className="mr-3 text-gray-800 font-semibold font-secondary">Show Duplicates</span>
         <input
           type="checkbox"
           checked={showDuplicates}

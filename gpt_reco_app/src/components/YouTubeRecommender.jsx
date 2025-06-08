@@ -71,8 +71,8 @@ Do NOT recommend a channel that is already present in the input list.`;
   };
 
   return (
-    <section className="max-w-3xl mx-auto p-8 mt-10 bg-white rounded-lg shadow-lg">
-      <h2 className="text-3xl font-extrabold mb-6 text-gray-900">YouTube Channel Recommender</h2>
+    <section className="max-w-3xl mx-auto p-8 mt-10 bg-white rounded-lg shadow-lg font-primary">
+      <h2 className="text-3xl font-extrabold mb-6 text-gray-900 font-secondary">YouTube Channel Recommender</h2>
       <textarea
         rows={5}
         placeholder="Paste your current YouTube subscriptions here (names and URLs if available)"
