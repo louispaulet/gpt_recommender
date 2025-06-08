@@ -64,6 +64,28 @@ VITE_CHANNEL_CHECK_URL="https://example.com/?url=" npm run dev
 
 If not set, it defaults to `https://head-checker.louispaulet13.workers.dev/?url=`.
 
+## Linting, Building, and Testing
+
+The `gpt_reco_app/package.json` file defines handy scripts for common development tasks. From within the `gpt_reco_app` directory you can:
+
+- **Lint** the codebase with **ESLint**:
+
+  ```bash
+  npm run lint
+  ```
+
+- **Build** the project for production using **Vite**:
+
+  ```bash
+  npm run build
+  ```
+
+- **Run** the test suite powered by **Vitest**:
+
+  ```bash
+  npm test
+  ```
+
 ## Usage
 
 1. On the homepage, enter your OpenAI API key in the provided input field and click "Check API Key" to validate it.
