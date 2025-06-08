@@ -90,7 +90,11 @@ function HomepageComponent() {
   return (
     <main className="max-w-3xl mx-auto p-8 bg-white rounded-lg shadow-lg mt-10 font-secondary">
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900 font-primary">Set up your OpenAI API key</h2>
+      <label htmlFor="api-key-input" className="block mb-2 text-gray-700 font-medium">
+        OpenAI API key
+      </label>
       <input
+        id="api-key-input"
         type="text"
         placeholder="Enter your OpenAI API key"
         value={apiKey}
