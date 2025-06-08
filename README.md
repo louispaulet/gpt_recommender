@@ -106,6 +106,18 @@ From within the `gpt_reco_app` directory you can:
 5. Click "Get Recommendations" to fetch AI-generated YouTube channel suggestions.
 6. View the list of recommended channels with status indicators and links.
 
+## Extracting Subscriptions from HTML
+
+Save your YouTube subscriptions page with `Ctrl+S` and run the helper script to
+pull channel names and URLs:
+
+```bash
+python scripts/extract_subs_from_html.py path/to/YouTube.html
+```
+
+The script prints each channel name followed by its URL, separated by a tab.
+
+
 ## Technologies Used
 
 - React 19
