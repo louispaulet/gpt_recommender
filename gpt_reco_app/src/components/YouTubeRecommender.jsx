@@ -3,6 +3,7 @@ import OpenAI from 'openai';
 import { zodTextFormat } from 'openai/helpers/zod';
 import YouTubeRecommendationList from './YouTubeRecommendationList';
 import YouTubeCriticizer from './YouTubeCriticizer';
+import Spinner from './Spinner.jsx';
 import { RecommendationsResponse, getOpenAIApiKey } from '../utils/openaiHelpers.js';
 function YouTubeRecommender() {
   const [inputText, setInputText] = useState('');
@@ -93,9 +94,16 @@ Do NOT recommend a channel that is already present in the input list.`;
       <button
         onClick={getRecommendations}
         disabled={loading || !inputText}
-        className="w-full py-3 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
+        className="w-full py-3 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center justify-center"
       >
-        {loading ? 'Getting Recommendations...' : 'Get Recommendations'}
+        {loading ? (
+          <>
+            <Spinner />
+            Getting Recommendations...
+          </>
+        ) : (
+          'Get Recommendations'
+        )}
       </button>
       {recommendations && (
         Array.isArray(recommendations) ? (

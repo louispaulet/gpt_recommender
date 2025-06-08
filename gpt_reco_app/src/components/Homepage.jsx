@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import OpenAI from 'openai';
 import Cookies from 'js-cookie';
+import Spinner from './Spinner.jsx';
 
 function HomepageComponent() {
   const [apiKey, setApiKey] = useState('');
@@ -99,9 +100,16 @@ function HomepageComponent() {
       <button
         onClick={checkApiKey}
         disabled={loading || !apiKey}
-        className="w-full py-3 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
+        className="w-full py-3 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center justify-center"
       >
-        {loading ? 'Checking...' : 'Check and save API Key'}
+        {loading ? (
+          <>
+            <Spinner />
+            Checking...
+          </>
+        ) : (
+          'Check and save API Key'
+        )}
       </button>
 
       {apiKey && cookieApiKeyLoaded && (
