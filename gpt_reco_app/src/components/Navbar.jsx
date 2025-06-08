@@ -18,6 +18,9 @@ function Navbar() {
               <Link to="/about" className="text-gray-700 hover:text-blue-600 font-semibold">
                 About
               </Link>
+              <Link to="/import-html" className="text-gray-700 hover:text-blue-600 font-semibold">
+                Import HTML
+              </Link>
             </div>
           </div>
           <div></div>
