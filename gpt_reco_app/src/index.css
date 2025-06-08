@@ -3,6 +3,11 @@
 
 body {
   font-family: "Source Sans 3", sans-serif;
+  background-color: white;
+}
+
+.dark body {
+  background-color: var(--dark-bg);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -30,6 +35,13 @@ h1, h2, h3, h4, h5, h6 {
   --primary-600: #4f46e5;
   --primary-700: #4338ca;
   --primary-900: #312e81;
+
+  /* Dark theme palette */
+  --dark-bg: #1f2937;
+  --dark-surface: #374151;
+  --dark-card: #1e293b;
+  --dark-text: #f3f4f6;
+  --dark-muted: #9ca3af;
 }
 
 /* Background colors */
@@ -61,3 +73,11 @@ h1, h2, h3, h4, h5, h6 {
 /* Ring utilities */
 .focus\:ring-primary-300:focus { --tw-ring-color: var(--primary-300); }
 .focus\:ring-primary-500:focus { --tw-ring-color: var(--primary-500); }
+
+/* Dark mode utilities */
+.dark .bg-dark-bg { background-color: var(--dark-bg); }
+.dark .bg-dark-surface { background-color: var(--dark-surface); }
+.dark .bg-dark-card { background-color: var(--dark-card); }
+.dark .text-dark-text { color: var(--dark-text); }
+.dark .text-dark-muted { color: var(--dark-muted); }
+.dark .border-dark-surface { border-color: var(--dark-surface); }

@@ -72,23 +72,23 @@ Do NOT recommend a channel that is already present in the input list.`;
   };
 
   return (
-    <section className="max-w-3xl mx-auto p-8 mt-10 bg-white rounded-lg shadow-lg font-secondary">
-      <h2 className="text-3xl font-extrabold mb-6 text-gray-900 font-primary">YouTube Channel Recommender</h2>
+    <section className="max-w-3xl mx-auto p-8 mt-10 bg-white dark:bg-dark-card rounded-lg shadow-lg font-secondary">
+      <h2 className="text-3xl font-extrabold mb-6 text-gray-900 dark:text-dark-text font-primary">YouTube Channel Recommender</h2>
       <textarea
         rows={5}
         placeholder="Paste your current YouTube subscriptions here (names and URLs if available)"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
-        className="w-full p-3 border border-gray-300 rounded-lg mb-6 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
+        className="w-full p-3 border border-gray-300 dark:border-dark-surface dark:bg-dark-surface dark:text-dark-text rounded-lg mb-6 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
       />
-      <label className="block mb-4 text-gray-700 font-medium">
+      <label className="block mb-4 text-gray-700 dark:text-dark-text font-medium">
         Number of recommendations to make:
         <input
           type="number"
           min="1"
           value={numRecommendations}
           onChange={(e) => setNumRecommendations(Number(e.target.value))}
-          className="ml-3 p-2 border border-gray-300 rounded w-20 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
+          className="ml-3 p-2 border border-gray-300 dark:border-dark-surface dark:bg-dark-surface dark:text-dark-text rounded w-20 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
         />
       </label>
       <button
@@ -115,7 +115,7 @@ Do NOT recommend a channel that is already present in the input list.`;
             />
           </>
         ) : (
-          <pre className="mt-6 p-4 bg-gray-100 border border-gray-300 rounded-lg whitespace-pre-wrap">{recommendations}</pre>
+          <pre className="mt-6 p-4 bg-gray-100 dark:bg-dark-surface border border-gray-300 dark:border-dark-surface rounded-lg whitespace-pre-wrap dark:text-dark-text">{recommendations}</pre>
         )
       )}
     </section>

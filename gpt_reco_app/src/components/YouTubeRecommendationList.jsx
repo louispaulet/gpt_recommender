@@ -83,7 +83,7 @@ function getStatusStyle(status) {
   } else if (status === 404) {
     return {
       liClass:
-        'p-3 border border-gray-500 rounded bg-gray-200 text-gray-800 flex items-center justify-between',
+        'p-3 border border-gray-500 dark:border-dark-surface rounded bg-gray-200 dark:bg-dark-surface text-gray-800 dark:text-dark-text flex items-center justify-between',
       icon: (
         <div className="tooltip" data-tooltip="Incorrect Link (HTTP 404)">
           <svg
@@ -123,7 +123,7 @@ function getStatusStyle(status) {
   } else {
     // status null or undefined, loading or error
     return {
-      liClass: 'p-3 border border-gray-300 rounded bg-gray-50 flex items-center justify-between',
+      liClass: 'p-3 border border-gray-300 dark:border-dark-surface rounded bg-gray-50 dark:bg-dark-surface flex items-center justify-between',
       icon: null,
     };
   }
@@ -178,9 +178,9 @@ function getStatusStyle(status) {
 
 
   return (
-    <div className="bg-white font-secondary">
+    <div className="bg-white dark:bg-dark-card font-secondary">
       <label className="my-4 flex items-center cursor-pointer select-none">
-        <span className="mr-3 text-gray-800 font-semibold font-secondary">Show Duplicates</span>
+        <span className="mr-3 text-gray-800 dark:text-dark-text font-semibold font-secondary">Show Duplicates</span>
         <input
           type="checkbox"
           checked={showDuplicates}
@@ -190,11 +190,11 @@ function getStatusStyle(status) {
         />
         <div
           className={`w-12 h-6 rounded-full transition-colors duration-300 ease-in-out ${
-            showDuplicates ? 'bg-primary-600' : 'bg-gray-300'
+            showDuplicates ? 'bg-primary-600' : 'bg-gray-300 dark:bg-dark-muted'
           }`}
         >
           <div
-            className={`bg-white w-6 h-6 rounded-full shadow-md transform transition-transform duration-300 ease-in-out ${
+            className={`bg-white dark:bg-dark-text w-6 h-6 rounded-full shadow-md transform transition-transform duration-300 ease-in-out ${
               showDuplicates ? 'translate-x-6' : 'translate-x-0'
             }`}
           />
@@ -230,7 +230,7 @@ function getStatusStyle(status) {
         >
           {rec.channel_name}
         </span>
-        <p className="text-gray-700 text-sm italic mb-2 md:mb-0 md:flex-grow md:text-center">{rec.recommendation_reason}</p>
+        <p className="text-gray-700 dark:text-dark-text text-sm italic mb-2 md:mb-0 md:flex-grow md:text-center">{rec.recommendation_reason}</p>
         <div className="flex items-center space-x-2 flex-shrink-0">
           {/* Status Icon with Tooltip */}
           {icon && (

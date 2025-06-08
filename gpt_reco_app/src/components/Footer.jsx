@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <footer className="bg-gray-100 py-4 mt-8">
-      <div className="max-w-4xl mx-auto px-4 text-center text-sm font-accent text-gray-600">
+    <footer className="bg-gray-100 dark:bg-dark-surface py-4 mt-8">
+      <div className="max-w-4xl mx-auto px-4 text-center text-sm font-accent text-gray-600 dark:text-dark-muted">
         &copy; {new Date().getFullYear()} GPT Recommender. All rights reserved.
         <div className="mt-2 font-secondary">
           <Link to="/privacy-policy" className="text-blue-600 hover:underline mx-2">
