@@ -34,7 +34,7 @@ The repository primarily contains the web application inside the `gpt_reco_app` 
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/louispaulet/gpt_recommender.git
    cd gpt_recommender/gpt_reco_app
    ```
 
