@@ -37,3 +37,8 @@ test('getOpenAIApiKey returns stored cookie value', () => {
   expect(getOpenAIApiKey()).toBe('abc123');
   Cookies.remove('openai_api_key');
 });
+
+test('getOpenAIApiKey returns undefined when cookie missing', () => {
+  Cookies.remove('openai_api_key');
+  expect(getOpenAIApiKey()).toBeUndefined();
+});

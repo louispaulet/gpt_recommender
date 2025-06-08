@@ -5,6 +5,14 @@ import YouTubeRecommendationList from './YouTubeRecommendationList';
 import YouTubeCriticizer from './YouTubeCriticizer';
 import Spinner from './Spinner.jsx';
 import { RecommendationsResponse, getOpenAIApiKey } from '../utils/openaiHelpers.js';
+
+// eslint-disable-next-line react-refresh/only-export-components
+export function parseSubscriptions(text) {
+  return text
+    .split(/[\n,;]+/)
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0);
+}
 function YouTubeRecommender() {
   const [inputText, setInputText] = useState('');
   const [recommendations, setRecommendations] = useState(null);
@@ -14,13 +22,7 @@ function YouTubeRecommender() {
   const [topics, setTopics] = useState('');
 
   // Helper function to parse subscriptions from inputText
-  const parseSubscriptions = (text) => {
-    // Split by new lines, commas, or semicolons, trim spaces, and filter out empty strings
-    return text
-      .split(/[\n,;]+/)
-      .map((s) => s.trim())
-      .filter((s) => s.length > 0);
-  };
+  // Defined outside the component for easier testing
 
   const getRecommendations = async () => {
     const currentApiKey = getOpenAIApiKey();
