@@ -15,11 +15,11 @@ function Navbar() {
               <Link to="/" className="text-gray-700 hover:text-blue-600 font-semibold">
                 Home
               </Link>
-              <Link to="/about" className="text-gray-700 hover:text-blue-600 font-semibold">
-                About
-              </Link>
               <Link to="/import-html" className="text-gray-700 hover:text-blue-600 font-semibold">
                 Import HTML
+              </Link>
+              <Link to="/about" className="text-gray-700 hover:text-blue-600 font-semibold">
+                About
               </Link>
             </div>
           </div>
