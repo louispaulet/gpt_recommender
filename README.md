@@ -37,6 +37,7 @@ The repository primarily contains the web application inside the `gpt_reco_app` 
   - `YouTubeRecommender.jsx` – queries OpenAI for channel suggestions.
   - `YouTubeCriticizer.jsx` – asks OpenAI to refine the first list.
   - `YouTubeRecommendationList.jsx` – lists results and checks each URL with a Cloudflare worker.
+- `public/robots.txt` – allows search engines to crawl the site and points to the sitemap.
 
 ## Installation
 
