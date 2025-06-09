@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import About from './pages/About.jsx';
 import Homepage from './pages/Homepage.jsx';
-import ImportSubscriptions from './pages/ImportSubscriptions.jsx';
+import YouTubePageExtraction from './pages/YouTubePageExtraction.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import TermsOfService from './pages/TermsOfService.jsx';
 
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/about" element={<About />} />
-          <Route path="/import-html" element={<ImportSubscriptions />} />
+          <Route path="/extract-youtube" element={<YouTubePageExtraction />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
         </Routes>

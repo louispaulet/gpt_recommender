@@ -109,7 +109,7 @@ From within the `gpt_reco_app` directory you can:
 
 ## Extracting Subscriptions from HTML
 
-Save your YouTube subscriptions page with `Ctrl+S` and either use the "Import HTML" page in the app or run the helper script below to pull channel names and URLs:
+Save your YouTube subscriptions page with `Ctrl+S` and either use the "YouTube Page Extraction" page in the app or run the helper script below to pull channel names and URLs:
 
 ```bash
 python scripts/extract_subs_from_html.py path/to/YouTube.html
