@@ -59,7 +59,7 @@ function YouTubeCriticizer({ subscriptions, recommendations }) {
 
   return (
     <div className="mt-8 p-6 bg-gray-50 rounded-lg shadow-md font-secondary">
-      <h2 className="text-2xl font-semibold mb-4 font-primary">Criticizer: Get Better Recommendations</h2>
+      <h2 className="text-2xl font-semibold mb-4 font-primary">Criticizer: Get&nbsp;Better Recommendations</h2>
       <button
         onClick={getImprovedRecommendations}
         disabled={loading}
