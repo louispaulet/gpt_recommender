@@ -5,6 +5,11 @@ on:
     branches: ["*"]
     paths:
       - "**/*.js"
+      - "**/*.jsx"
+      - "**/*.cjs"
+      - "**/*.mjs"
+      - "**/*.ts"
+      - "**/*.tsx"
 
 jobs:
   test:
