@@ -158,6 +158,13 @@ graph/Twitter tags used for previews. If the site's domain or screenshot image
 changes, update these tags so search engines and social networks display the
 correct information.
 
+## Sitemap
+
+`gpt_reco_app/public/sitemap.xml` lists all public routes so crawlers can
+discover them. Whenever you add a new route in `src/App.jsx`, create a
+corresponding `<url>` entry using the canonical domain
+`https://gpt-reco.thefrenchartist.dev`.
+
 
 ## Notes
 
