@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 import { zodTextFormat } from 'openai/helpers/zod';
 import YouTubeRecommendationList from './YouTubeRecommendationList';
 import YouTubeCriticizer from './YouTubeCriticizer';
-import Spinner from './Spinner.jsx';
+import LoadingSkeleton from './LoadingSkeleton.jsx';
 import useRotatingMessages from '../utils/useRotatingMessages.js';
 import useDebounce from '../utils/useDebounce.js';
 import { RecommendationsResponse, getOpenAIApiKey } from '../utils/openaiHelpers.js';
@@ -242,7 +242,7 @@ function YouTubeRecommender() {
       >
         {loading ? (
           <>
-            <Spinner />
+            <LoadingSkeleton className="h-5 w-5 mr-2" />
             {buttonLabel}
           </>
         ) : (
