@@ -150,6 +150,13 @@ export default defineConfig({
 @tailwind utilities;
 ```
 
+## HTML Metadata
+
+`gpt_reco_app/index.html` defines the meta description, canonical URL and open
+graph/Twitter tags used for previews. If the site's domain or screenshot image
+changes, update these tags so search engines and social networks display the
+correct information.
+
 
 ## Notes
 
