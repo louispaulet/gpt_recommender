@@ -44,6 +44,7 @@ function YouTubeRecommender() {
   const [showImporter, setShowImporter] = useState(false);
   const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState('');
+  const [requestError, setRequestError] = useState('');
 
   const buttonLabel = useRotatingMessages(
     loading,
@@ -56,6 +57,7 @@ function YouTubeRecommender() {
       setInputText('');
       setShowImporter(false);
       setError('');
+      setRequestError('');
     }
   };
 
@@ -85,8 +87,20 @@ function YouTubeRecommender() {
     const currentApiKey = getOpenAIApiKey();
     if (!currentApiKey) {
       setRecommendations('API key not found. Please set your OpenAI API key in the homepage.');
+      setRequestError('');
       return;
     }
+    if (useSubscriptions && !inputText.trim()) {
+      setRequestError('Please upload or paste your subscriptions or disable the checkbox.');
+      setRecommendations(null);
+      return;
+    }
+    if (numRecommendations < 1) {
+      setRequestError('Number of recommendations must be at least 1.');
+      setRecommendations(null);
+      return;
+    }
+    setRequestError('');
     setLoading(true);
     setRecommendations(null);
     try {
@@ -127,7 +141,12 @@ function YouTubeRecommender() {
       setRecommendations(parsedRecommendations);
     } catch (error) {
       console.error('Error fetching recommendations:', error);
-      setRecommendations('Failed to get recommendations. Please check your API key and try again.');
+      const networkRegex = /Network|Failed to fetch/i;
+      if (error && networkRegex.test(error.message)) {
+        setRequestError('Network error while fetching recommendations. Please try again.');
+      } else {
+        setRequestError(`Failed to get recommendations: ${error.message}`);
+      }
     } finally {
       setLoading(false);
     }
@@ -227,6 +246,9 @@ function YouTubeRecommender() {
           buttonLabel
         )}
       </button>
+      {requestError && (
+        <p className="mt-4 text-sm text-red-600" role="alert">{requestError}</p>
+      )}
       {recommendations && (
         Array.isArray(recommendations) ? (
           <>

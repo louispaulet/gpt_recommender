@@ -57,7 +57,12 @@ function YouTubeCriticizer({ subscriptions, recommendations }) {
       const parsedRecommendations = response.output_parsed.recommendations || [];
       setImprovedRecommendations(parsedRecommendations);
     } catch (err) {
-      setError('Error fetching improved recommendations: ' + err.message);
+      const networkRegex = /Network|Failed to fetch/i;
+      if (err && networkRegex.test(err.message)) {
+        setError('Network error while fetching improved recommendations. Please try again.');
+      } else {
+        setError('Error fetching improved recommendations: ' + err.message);
+      }
     } finally {
       setLoading(false);
     }

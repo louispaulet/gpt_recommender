@@ -56,7 +56,12 @@ function HomepageComponent() {
         setFadeOut(false);
       }, 3000);
     } catch (error) {
-      setCheckResult({ message: `API key is invalid or request failed: ${error.message}`, status: 'error' });
+      const networkRegex = /Network|Failed to fetch/i;
+      const msg =
+        error && networkRegex.test(error.message)
+          ? 'Network error while validating API key. Please check your connection.'
+          : `API key is invalid or request failed: ${error.message}`;
+      setCheckResult({ message: msg, status: 'error' });
       // Remove invalid key from cookie if any
       Cookies.remove('openai_api_key');
       setCookieApiKeyLoaded(false);
