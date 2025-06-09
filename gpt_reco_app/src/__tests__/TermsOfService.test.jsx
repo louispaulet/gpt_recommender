@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { test, expect } from 'vitest';
-import TermsOfService from '../pages/TermsOfService.jsx';
+import TermsOfService from '../pages/legal/TermsOfService.jsx';
 
 test('shows terms heading', () => {
   render(<TermsOfService />);

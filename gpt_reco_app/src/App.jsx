@@ -3,8 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 const About = lazy(() => import('./pages/About.jsx'));
 const Homepage = lazy(() => import('./pages/Homepage.jsx'));
 const YouTubePageExtraction = lazy(() => import('./pages/YouTubePageExtraction.jsx'));
-const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy.jsx'));
-const TermsOfService = lazy(() => import('./pages/TermsOfService.jsx'));
+const PrivacyPolicy = lazy(() => import('./pages/legal/PrivacyPolicy.jsx'));
+const TermsOfService = lazy(() => import('./pages/legal/TermsOfService.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
 import Navbar from './components/Navbar.jsx';

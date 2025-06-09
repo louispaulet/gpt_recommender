@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { test, expect } from 'vitest';
-import PrivacyPolicy from '../pages/PrivacyPolicy.jsx';
+import PrivacyPolicy from '../pages/legal/PrivacyPolicy.jsx';
 
 test('shows privacy policy heading', () => {
   render(<PrivacyPolicy />);
