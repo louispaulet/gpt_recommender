@@ -5,8 +5,28 @@ const DEFAULT_MESSAGES = [
   'Feeding hamsters',
   'Consulting oracles',
   'Tickling electrons',
-  'Shaking dice'
+  'Shaking dice',
+  'Polishing pixels',
+  'Untangling wires',
+  'Charging creativity crystals',
+  'Calibrating sarcasm detector',
+  'Counting penguins',
+  'Rebooting flux capacitor',
+  'Tuning algorithms',
+  'Petting server hamsters',
+  'Firing up puns',
+  'Rearranging playlists',
+  'Herding rubber ducks',
+  'Recycling jokes'
 ];
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
 export default function useRotatingMessages(
   isLoading,
@@ -16,13 +36,16 @@ export default function useRotatingMessages(
 ) {
   const [label, setLabel] = useState(defaultLabel);
   const indexRef = useRef(0);
+  const messagesRef = useRef(messages);
 
   useEffect(() => {
     if (isLoading) {
-      setLabel(messages[indexRef.current]);
+      messagesRef.current = shuffle([...messages]);
+      indexRef.current = 0;
+      setLabel(messagesRef.current[indexRef.current]);
       const id = setInterval(() => {
-        indexRef.current = (indexRef.current + 1) % messages.length;
-        setLabel(messages[indexRef.current]);
+        indexRef.current = (indexRef.current + 1) % messagesRef.current.length;
+        setLabel(messagesRef.current[indexRef.current]);
       }, interval);
       return () => clearInterval(id);
     }
