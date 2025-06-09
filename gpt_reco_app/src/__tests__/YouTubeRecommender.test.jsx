@@ -2,6 +2,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { test, expect } from 'vitest';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
 import YouTubeRecommender, {
   parseSubscriptions,
   parseHtmlSubscriptions,
@@ -72,6 +75,18 @@ test('parseHtmlSubscriptions ignores items without channel link', () => {
 
 test('parseHtmlSubscriptions returns empty array when no matches', () => {
   expect(parseHtmlSubscriptions('<div></div>')).toEqual([]);
+});
+
+test('parseHtmlSubscriptions handles sample subscriptions html file', () => {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const html = readFileSync(
+    path.join(__dirname, 'fixtures', 'subscriptions.html'),
+    'utf8'
+  );
+  expect(parseHtmlSubscriptions(html)).toEqual([
+    'https://www.youtube.com/@alpha',
+    'https://www.youtube.com/@beta',
+  ]);
 });
 
 test('parseSubscriptions trims whitespace and ignores blanks', () => {
