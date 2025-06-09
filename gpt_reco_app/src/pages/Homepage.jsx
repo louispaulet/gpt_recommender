@@ -1,10 +1,20 @@
 import React from 'react';
 import HomepageComponent from '../components/Homepage.jsx';
 import YouTubeRecommender from '../components/YouTubeRecommender.jsx';
+import { Helmet } from 'react-helmet';
 
 function Homepage() {
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto font-secondary">
+    <>
+      <Helmet>
+        <title>GPT YouTube Channel Recommender</title>
+        <meta
+          name="description"
+          content="Generate personalized YouTube channel recommendations using GPT."
+        />
+        <link rel="canonical" href="https://gpt-reco.thefrenchartist.dev/" />
+      </Helmet>
+      <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto font-secondary">
       <h1 className="text-3xl sm:text-6xl font-extrabold font-primary text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 drop-shadow-lg mb-12 text-center">
         GPT YouTube Channel Recommender
       </h1>
@@ -15,7 +25,8 @@ function Homepage() {
       <div className="mt-12">
         <YouTubeRecommender />
       </div>
-    </div>
+      </div>
+    </>
   );
 }
 

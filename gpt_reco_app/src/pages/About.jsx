@@ -1,8 +1,21 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const About = () => {
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto font-secondary">
+    <>
+      <Helmet>
+        <title>About - GPT YouTube Channel Recommender</title>
+        <meta
+          name="description"
+          content="Learn more about the GPT YouTube Channel Recommender project."
+        />
+        <link
+          rel="canonical"
+          href="https://gpt-reco.thefrenchartist.dev/about"
+        />
+      </Helmet>
+      <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto font-secondary">
       <section className="mb-10 p-6 bg-primary-100 rounded-lg shadow-md text-primary-900 font-medium text-center text-lg">
         <h1 className="text-4xl font-extrabold mb-6 font-primary">About GPT YouTube Channel Recommender</h1>
         <h2 className="text-2xl font-extrabold mb-3 tracking-wide uppercase border-b-2 border-primary-400 pb-1 font-primary">
@@ -40,7 +53,8 @@ const About = () => {
           We plan to extend the app's capabilities to recommend individual YouTube videos and other content types, enhancing your personalized discovery experience.
         </p>
       </section>
-    </div>
+      </div>
+    </>
   );
 };
 

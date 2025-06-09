@@ -1,8 +1,21 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 function PrivacyPolicy() {
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4 font-secondary">
+    <>
+      <Helmet>
+        <title>Privacy Policy</title>
+        <meta
+          name="description"
+          content="Our commitment to protecting your data and privacy."
+        />
+        <link
+          rel="canonical"
+          href="https://gpt-reco.thefrenchartist.dev/privacy-policy"
+        />
+      </Helmet>
+      <div className="max-w-4xl mx-auto py-8 px-4 font-secondary">
       <h1 className="text-3xl font-bold mb-4 font-primary">Privacy Policy</h1>
 
       <h2 className="text-2xl font-semibold mb-3 font-primary">🛡️ Our Commitment as an EU Company</h2>
@@ -29,7 +42,8 @@ function PrivacyPolicy() {
       <p>
         Protecting your privacy is a fundamental priority for us. We take all necessary technical and organizational measures to ensure that any data we handle is kept safe, confidential, and secure. Our commitment extends beyond compliance; it is about fostering a trustworthy environment where you can use our services with confidence, knowing that your privacy is respected and safeguarded at every step.
       </p>
-    </div>
+      </div>
+    </>
   );
 }
 

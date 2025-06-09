@@ -1,8 +1,21 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 function TermsOfService() {
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4 font-secondary">
+    <>
+      <Helmet>
+        <title>Terms of Service</title>
+        <meta
+          name="description"
+          content="Rules for using GPT YouTube Channel Recommender."
+        />
+        <link
+          rel="canonical"
+          href="https://gpt-reco.thefrenchartist.dev/terms-of-service"
+        />
+      </Helmet>
+      <div className="max-w-4xl mx-auto py-8 px-4 font-secondary">
       <h1 className="text-3xl font-bold mb-4 font-primary">Terms of Service</h1>
 
       <h2 className="text-2xl font-semibold mt-6 mb-3 font-primary">1. Acceptance of Terms</h2>
@@ -56,7 +69,8 @@ function TermsOfService() {
       <p>
         For questions about these Terms, you may reach the Providers through the contact information supplied in the project’s repository or website.
       </p>
-    </div>
+      </div>
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { MdArrowBack } from 'react-icons/md';
 import HtmlSubscriptionImporter from '../components/HtmlSubscriptionImporter.jsx';
 
@@ -8,7 +9,19 @@ const YouTubePageExtraction = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto font-secondary space-y-8">
+    <>
+      <Helmet>
+        <title>Extract Your YouTube Subscriptions</title>
+        <meta
+          name="description"
+          content="Instructions to export your subscribed channels from YouTube."
+        />
+        <link
+          rel="canonical"
+          href="https://gpt-reco.thefrenchartist.dev/extract-youtube"
+        />
+      </Helmet>
+      <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto font-secondary space-y-8">
       <h1 className="text-3xl sm:text-5xl font-extrabold font-primary text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 drop-shadow-lg text-center">
         Extract Your Subscriptions
       </h1>
@@ -36,7 +49,8 @@ const YouTubePageExtraction = () => {
         <MdArrowBack size={24} />
         Get back to youtube recomender
       </button>
-    </div>
+      </div>
+    </>
   );
 };
 
