@@ -9,7 +9,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "sitemap": "node ../scripts/update_sitemap.js",
+    "predeploy": "npm run sitemap && npm run build",
     "deploy": "gh-pages -d dist",
     "test": "vitest run"
   },

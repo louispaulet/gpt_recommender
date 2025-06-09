@@ -93,6 +93,12 @@ From within the `gpt_reco_app` directory you can:
   npm run build
   ```
 
+- **Generate** the sitemap from defined routes:
+
+  ```bash
+  npm run sitemap
+  ```
+
 - **Run** the test suite powered by **Vitest**:
 
   ```bash
@@ -161,8 +167,10 @@ correct information.
 ## Sitemap
 
 `gpt_reco_app/public/sitemap.xml` lists all public routes so crawlers can
-discover them. Whenever you add a new route in `src/App.jsx`, create a
-corresponding `<url>` entry using the canonical domain
+discover them. Run `npm run sitemap` in the `gpt_reco_app` directory to
+generate this file automatically from the routes defined in `src/App.jsx`.
+The command is executed before `npm run deploy`, so remember to run it
+whenever deploying the site. The sitemap uses the canonical domain
 `https://gpt-reco.thefrenchartist.dev`.
 
 
