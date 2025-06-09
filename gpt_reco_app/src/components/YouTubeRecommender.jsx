@@ -5,6 +5,7 @@ import YouTubeRecommendationList from './YouTubeRecommendationList';
 import YouTubeCriticizer from './YouTubeCriticizer';
 import Spinner from './Spinner.jsx';
 import useRotatingMessages from '../utils/useRotatingMessages.js';
+import useDebounce from '../utils/useDebounce.js';
 import { RecommendationsResponse, getOpenAIApiKey } from '../utils/openaiHelpers.js';
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -35,11 +36,13 @@ export function parseHtmlSubscriptions(html) {
 }
 function YouTubeRecommender() {
   const [inputText, setInputText] = useState('');
+  const debouncedInputText = useDebounce(inputText, 500);
   const [recommendations, setRecommendations] = useState(null);
   const [loading, setLoading] = useState(false);
   const [numRecommendations, setNumRecommendations] = useState(10);
   const [prompt, setPrompt] = useState('');
   const [topics, setTopics] = useState('');
+  const debouncedTopics = useDebounce(topics, 500);
   const [useSubscriptions, setUseSubscriptions] = useState(false);
   const [showImporter, setShowImporter] = useState(false);
   const [dragActive, setDragActive] = useState(false);
@@ -95,13 +98,13 @@ function YouTubeRecommender() {
         dangerouslyAllowBrowser: true,
       });
 
-      const topicLine = topics.trim()
-        ? `Consider these preferred topics or keywords when making recommendations: ${topics}.`
+      const topicLine = debouncedTopics.trim()
+        ? `Consider these preferred topics or keywords when making recommendations: ${debouncedTopics}.`
         : '';
 
       const subsPrompt =
-        useSubscriptions && inputText.trim()
-          ? `The input list of subscribed channels:\n\n${inputText}\n\nDo NOT recommend a channel that is already present in the input list.`
+        useSubscriptions && debouncedInputText.trim()
+          ? `The input list of subscribed channels:\n\n${debouncedInputText}\n\nDo NOT recommend a channel that is already present in the input list.`
           : '';
 
       const basePrompt = `Please suggest ${numRecommendations} new YouTube channels to watch.`;
@@ -232,7 +235,7 @@ function YouTubeRecommender() {
           <>
             <YouTubeRecommendationList recommendations={recommendations} prompt={prompt} />
             <YouTubeCriticizer
-              subscriptions={parseSubscriptions(inputText)}
+              subscriptions={parseSubscriptions(debouncedInputText)}
               recommendations={recommendations}
             />
           </>

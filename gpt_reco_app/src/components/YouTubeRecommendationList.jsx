@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
+const statusCache = {};
+
 const CHANNEL_CHECK_URL =
   import.meta.env.VITE_CHANNEL_CHECK_URL ??
   'https://head-checker.louispaulet13.workers.dev/?url=';
@@ -36,13 +38,31 @@ function YouTubeRecommendationList({ recommendations, prompt }) {
     }
 
     async function checkAllStatuses() {
-      const statusPromises = uniqueRecommendations.map(async (rec) => {
+      const cachedStatuses = {};
+      const urlsToFetch = [];
+      uniqueRecommendations.forEach((rec) => {
+        if (statusCache[rec.channel_url] !== undefined) {
+          cachedStatuses[rec.channel_url] = statusCache[rec.channel_url];
+        } else {
+          urlsToFetch.push(rec.channel_url);
+        }
+      });
+
+      if (Object.keys(cachedStatuses).length > 0) {
+        setStatuses((prev) => ({ ...prev, ...cachedStatuses }));
+      }
+
+      if (urlsToFetch.length === 0) return;
+
+      const statusPromises = urlsToFetch.map(async (url) => {
         try {
-          const status = await checkUrlStatus(rec.channel_url);
-          return { url: rec.channel_url, status };
+          const status = await checkUrlStatus(url);
+          statusCache[url] = status;
+          return { url, status };
         } catch (error) {
-          console.error('Error checking status for', rec.channel_url, error);
-          return { url: rec.channel_url, status: null };
+          console.error('Error checking status for', url, error);
+          statusCache[url] = null;
+          return { url, status: null };
         }
       });
 
