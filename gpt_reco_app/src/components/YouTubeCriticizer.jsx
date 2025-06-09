@@ -4,12 +4,21 @@ import YouTubeRecommendationList from './YouTubeRecommendationList.jsx';
 import { zodTextFormat } from 'openai/helpers/zod';
 import { RecommendationsResponse, getOpenAIApiKey } from '../utils/openaiHelpers.js';
 import Spinner from './Spinner.jsx';
+import useRotatingMessages from '../utils/useRotatingMessages.js';
+
+const funnyMessages = ['Summoning AI', 'Feeding hamsters', 'Almost there'];
 
 
 function YouTubeCriticizer({ subscriptions, recommendations }) {
   const [improvedRecommendations, setImprovedRecommendations] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const buttonLabel = useRotatingMessages(
+    loading,
+    'Get Improved Recommendations',
+    funnyMessages
+  );
 
   // Load API key from cookie on mount
   const [openaiApiKey, setOpenaiApiKey] = React.useState('');
@@ -68,10 +77,10 @@ function YouTubeCriticizer({ subscriptions, recommendations }) {
         {loading ? (
           <>
             <Spinner />
-            Loading...
+            {buttonLabel}
           </>
         ) : (
-          'Get Improved Recommendations'
+          buttonLabel
         )}
       </button>
       {error && <p className="text-red-600 mb-4">{error}</p>}
