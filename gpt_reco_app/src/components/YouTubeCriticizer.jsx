@@ -6,8 +6,6 @@ import { RecommendationsResponse, getOpenAIApiKey } from '../utils/openaiHelpers
 import Spinner from './Spinner.jsx';
 import useRotatingMessages from '../utils/useRotatingMessages.js';
 
-const funnyMessages = ['Summoning AI', 'Feeding hamsters', 'Almost there'];
-
 
 function YouTubeCriticizer({ subscriptions, recommendations }) {
   const [improvedRecommendations, setImprovedRecommendations] = useState([]);
@@ -16,8 +14,7 @@ function YouTubeCriticizer({ subscriptions, recommendations }) {
 
   const buttonLabel = useRotatingMessages(
     loading,
-    'Get Improved Recommendations',
-    funnyMessages
+    'Get Improved Recommendations'
   );
 
   // Load API key from cookie on mount

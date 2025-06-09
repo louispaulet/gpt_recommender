@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import OpenAI from 'openai';
 import Cookies from 'js-cookie';
 import Spinner from './Spinner.jsx';
-import useRotatingMessages from '../utils/useRotatingMessages.js';
 
-const funnyMessages = ['Summoning AI', 'Feeding hamsters', 'Almost there'];
 
 function HomepageComponent() {
   const [apiKey, setApiKey] = useState('');
@@ -13,11 +11,6 @@ function HomepageComponent() {
   const [loading, setLoading] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
-  const buttonLabel = useRotatingMessages(
-    loading,
-    'Check and save API Key',
-    funnyMessages
-  );
 
   useEffect(() => {
     // Load API key from cookie on mount
@@ -118,10 +111,10 @@ function HomepageComponent() {
         {loading ? (
           <>
             <Spinner />
-            {buttonLabel}
+            Checking...
           </>
         ) : (
-          buttonLabel
+          'Check and save API Key'
         )}
       </button>
 

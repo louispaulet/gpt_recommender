@@ -5,8 +5,6 @@ import YouTubeRecommendationList from './YouTubeRecommendationList';
 import YouTubeCriticizer from './YouTubeCriticizer';
 import Spinner from './Spinner.jsx';
 import useRotatingMessages from '../utils/useRotatingMessages.js';
-
-const funnyMessages = ['Summoning AI', 'Feeding hamsters', 'Almost there'];
 import { RecommendationsResponse, getOpenAIApiKey } from '../utils/openaiHelpers.js';
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -49,8 +47,7 @@ function YouTubeRecommender() {
 
   const buttonLabel = useRotatingMessages(
     loading,
-    'Get Recommendations',
-    funnyMessages
+    'Get Recommendations'
   );
 
   const handleToggleSubscriptions = (checked) => {

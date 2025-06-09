@@ -1,6 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 
-export default function useRotatingMessages(isLoading, defaultLabel, messages, interval = 2000) {
+const DEFAULT_MESSAGES = [
+  'Summoning AI',
+  'Feeding hamsters',
+  'Consulting oracles',
+  'Tickling electrons',
+  'Shaking dice'
+];
+
+export default function useRotatingMessages(
+  isLoading,
+  defaultLabel,
+  messages = DEFAULT_MESSAGES,
+  interval = 2000
+) {
   const [label, setLabel] = useState(defaultLabel);
   const indexRef = useRef(0);
 
