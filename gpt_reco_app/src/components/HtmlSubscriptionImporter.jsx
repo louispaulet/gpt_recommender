@@ -12,9 +12,13 @@ export function parseSubscriptions(html) {
       const nameTag = ch.querySelector('ytd-channel-name yt-formatted-string#text');
       const handleTag = ch.querySelector('a.channel-link[href*="/@"]');
       if (nameTag && handleTag) {
+        const handleHref = handleTag.getAttribute('href').trim();
+        const url = handleHref.startsWith('http')
+          ? handleHref
+          : `https://www.youtube.com${handleHref}`;
         return {
           name: nameTag.textContent.trim(),
-          url: `https://www.youtube.com${handleTag.getAttribute('href').trim()}`,
+          url,
         };
       }
       return null;
