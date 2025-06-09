@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import OpenAI from 'openai';
 import { zodTextFormat } from 'openai/helpers/zod';
 import YouTubeRecommendationList from './YouTubeRecommendationList';
@@ -109,6 +110,13 @@ Do NOT recommend a channel that is already present in the input list.`;
           className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
         />
       </label>
+      <p className="text-sm mb-4 text-gray-700">
+        Need to extract your subscriptions?{' '}
+        <Link to="/extract-youtube" className="text-primary-700 underline">
+          Use the YouTube Page Extraction page
+        </Link>
+        .
+      </p>
       <button
         onClick={getRecommendations}
         disabled={loading || !inputText}

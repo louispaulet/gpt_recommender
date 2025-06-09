@@ -15,8 +15,8 @@ function Navbar() {
               <Link to="/" className="text-gray-700 hover:text-blue-600 font-semibold">
                 Home
               </Link>
-              <Link to="/import-html" className="text-gray-700 hover:text-blue-600 font-semibold">
-                Import HTML
+              <Link to="/extract-youtube" className="text-gray-700 hover:text-blue-600 font-semibold">
+                YouTube Page Extraction
               </Link>
               <Link to="/about" className="text-gray-700 hover:text-blue-600 font-semibold">
                 About
