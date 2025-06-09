@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MdArrowBack } from 'react-icons/md';
 import HtmlSubscriptionImporter from '../components/HtmlSubscriptionImporter.jsx';
 
 const YouTubePageExtraction = () => {
@@ -29,9 +31,10 @@ const YouTubePageExtraction = () => {
       <HtmlSubscriptionImporter />
       <button
         onClick={() => navigate('/')}
-        className="mt-8 w-full py-4 text-white font-bold text-xl rounded-lg bg-red-600 hover:bg-red-700 transition-colors"
+        className="mt-8 w-full py-4 text-white font-bold text-xl rounded-lg bg-red-600 hover:bg-red-700 transition-colors flex items-center justify-center gap-2"
       >
-        get back to youtube recomender
+        <MdArrowBack size={24} />
+        Get back to youtube recomender
       </button>
     </div>
   );
