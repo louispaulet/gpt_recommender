@@ -44,6 +44,15 @@ function YouTubeRecommender() {
   const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState('');
 
+  const handleToggleSubscriptions = (checked) => {
+    setUseSubscriptions(checked);
+    if (!checked) {
+      setInputText('');
+      setShowImporter(false);
+      setError('');
+    }
+  };
+
   const handleFile = (file) => {
     if (!file.type.includes('html')) {
       setError('Please upload a valid HTML file.');
@@ -84,19 +93,16 @@ function YouTubeRecommender() {
         ? `Consider these preferred topics or keywords when making recommendations: ${topics}.`
         : '';
 
-      const newPrompt = `
-Based on the following list of YouTube recommendations, please suggest ${numRecommendations} new YouTube channels to watch.
-${topicLine}
-The input list of subscribed channels:
+      const subsPrompt =
+        useSubscriptions && inputText.trim()
+          ? `The input list of subscribed channels:\n\n${inputText}\n\nDo NOT recommend a channel that is already present in the input list.`
+          : '';
 
-${inputText}
+      const basePrompt = `Please suggest ${numRecommendations} new YouTube channels to watch.`;
 
-Please respond ONLY in JSON format with a list of recommendations.
-Each recommendation should have the following fields:
-"channel_name" (string), "channel_url" (string) where the URL is formatted as "https://www.youtube.com/@" + slug of the channel name,
-and "recommendation_reason" (string) which is a single short sentence explaining why this channel is recommended.
-
-Do NOT recommend a channel that is already present in the input list.`;
+      const newPrompt = [basePrompt, topicLine, subsPrompt]
+        .filter((s) => s)
+        .join('\n');
 
       setPrompt(newPrompt);
 
@@ -128,7 +134,7 @@ Do NOT recommend a channel that is already present in the input list.`;
         <input
           type="checkbox"
           checked={useSubscriptions}
-          onChange={(e) => setUseSubscriptions(e.target.checked)}
+          onChange={(e) => handleToggleSubscriptions(e.target.checked)}
           className="mr-2"
         />
         Use my subscription list
