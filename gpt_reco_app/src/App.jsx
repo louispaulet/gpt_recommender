@@ -5,6 +5,7 @@ import Homepage from './pages/Homepage.jsx';
 import YouTubePageExtraction from './pages/YouTubePageExtraction.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import TermsOfService from './pages/TermsOfService.jsx';
+import NotFound from './pages/NotFound.jsx';
 
 import Navbar from './components/Navbar.jsx';
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/extract-youtube" element={<YouTubePageExtraction />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
