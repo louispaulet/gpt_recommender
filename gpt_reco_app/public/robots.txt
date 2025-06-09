@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gpt-reco.thefrenchartist.dev/sitemap.xml
