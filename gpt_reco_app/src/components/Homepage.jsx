@@ -3,12 +3,14 @@ import OpenAI from 'openai';
 import Cookies from 'js-cookie';
 import Spinner from './Spinner.jsx';
 
+
 function HomepageComponent() {
   const [apiKey, setApiKey] = useState('');
   const [cookieApiKeyLoaded, setCookieApiKeyLoaded] = useState(false);
   const [checkResult, setCheckResult] = useState(null); // { message: string, status: 'success' | 'error' }
   const [loading, setLoading] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+
 
   useEffect(() => {
     // Load API key from cookie on mount

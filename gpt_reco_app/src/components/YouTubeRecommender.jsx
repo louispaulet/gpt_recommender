@@ -4,6 +4,7 @@ import { zodTextFormat } from 'openai/helpers/zod';
 import YouTubeRecommendationList from './YouTubeRecommendationList';
 import YouTubeCriticizer from './YouTubeCriticizer';
 import Spinner from './Spinner.jsx';
+import useRotatingMessages from '../utils/useRotatingMessages.js';
 import { RecommendationsResponse, getOpenAIApiKey } from '../utils/openaiHelpers.js';
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -43,6 +44,11 @@ function YouTubeRecommender() {
   const [showImporter, setShowImporter] = useState(false);
   const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState('');
+
+  const buttonLabel = useRotatingMessages(
+    loading,
+    'Get Recommendations'
+  );
 
   const handleToggleSubscriptions = (checked) => {
     setUseSubscriptions(checked);
@@ -215,10 +221,10 @@ function YouTubeRecommender() {
         {loading ? (
           <>
             <Spinner />
-            Getting Recommendations...
+            {buttonLabel}
           </>
         ) : (
-          'Get Recommendations'
+          buttonLabel
         )}
       </button>
       {recommendations && (
