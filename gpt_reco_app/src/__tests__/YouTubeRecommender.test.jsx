@@ -3,14 +3,14 @@ import { MemoryRouter } from 'react-router-dom';
 import { test, expect } from 'vitest';
 import YouTubeRecommender, { parseSubscriptions } from '../components/YouTubeRecommender.jsx';
 
-test('button disabled without input', () => {
+test('button enabled without subscriptions', () => {
   render(
     <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <YouTubeRecommender />
     </MemoryRouter>
   );
   const btn = screen.getByRole('button', { name: /get recommendations/i });
-  expect(btn).toBeDisabled();
+  expect(btn).toBeEnabled();
 });
 
 test('parseSubscriptions splits lines, commas and semicolons', () => {
