@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import OpenAI from 'openai';
 import { zodTextFormat } from 'openai/helpers/zod';
 import YouTubeRecommendationList from './YouTubeRecommendationList';
@@ -14,6 +13,25 @@ export function parseSubscriptions(text) {
     .map((s) => s.trim())
     .filter((s) => s.length > 0);
 }
+
+// eslint-disable-next-line react-refresh/only-export-components
+export function parseHtmlSubscriptions(html) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  const channels = Array.from(doc.querySelectorAll('ytd-channel-renderer'));
+  return channels
+    .map((ch) => {
+      const handleTag = ch.querySelector('a.channel-link[href*="/@"]');
+      if (handleTag) {
+        const href = handleTag.getAttribute('href').trim();
+        return href.startsWith('http')
+          ? href
+          : `https://www.youtube.com${href}`;
+      }
+      return null;
+    })
+    .filter(Boolean);
+}
 function YouTubeRecommender() {
   const [inputText, setInputText] = useState('');
   const [recommendations, setRecommendations] = useState(null);
@@ -21,6 +39,38 @@ function YouTubeRecommender() {
   const [numRecommendations, setNumRecommendations] = useState(10);
   const [prompt, setPrompt] = useState('');
   const [topics, setTopics] = useState('');
+  const [useSubscriptions, setUseSubscriptions] = useState(false);
+  const [showImporter, setShowImporter] = useState(false);
+  const [dragActive, setDragActive] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleToggleSubscriptions = (checked) => {
+    setUseSubscriptions(checked);
+    if (!checked) {
+      setInputText('');
+      setShowImporter(false);
+      setError('');
+    }
+  };
+
+  const handleFile = (file) => {
+    if (!file.type.includes('html')) {
+      setError('Please upload a valid HTML file.');
+      return;
+    }
+    setError('');
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const html = ev.target.result;
+      const urls = parseHtmlSubscriptions(html);
+      if (urls.length === 0) {
+        setError('No channels found. Did you save the correct page?');
+      }
+      setInputText(urls.join('\n'));
+    };
+    reader.onerror = () => setError('Failed to read file.');
+    reader.readAsText(file);
+  };
 
   // Helper function to parse subscriptions from inputText
   // Defined outside the component for easier testing
@@ -43,19 +93,16 @@ function YouTubeRecommender() {
         ? `Consider these preferred topics or keywords when making recommendations: ${topics}.`
         : '';
 
-      const newPrompt = `
-Based on the following list of YouTube recommendations, please suggest ${numRecommendations} new YouTube channels to watch.
-${topicLine}
-The input list of subscribed channels:
+      const subsPrompt =
+        useSubscriptions && inputText.trim()
+          ? `The input list of subscribed channels:\n\n${inputText}\n\nDo NOT recommend a channel that is already present in the input list.`
+          : '';
 
-${inputText}
+      const basePrompt = `Please suggest ${numRecommendations} new YouTube channels to watch.`;
 
-Please respond ONLY in JSON format with a list of recommendations.
-Each recommendation should have the following fields:
-"channel_name" (string), "channel_url" (string) where the URL is formatted as "https://www.youtube.com/@" + slug of the channel name,
-and "recommendation_reason" (string) which is a single short sentence explaining why this channel is recommended.
-
-Do NOT recommend a channel that is already present in the input list.`;
+      const newPrompt = [basePrompt, topicLine, subsPrompt]
+        .filter((s) => s)
+        .join('\n');
 
       setPrompt(newPrompt);
 
@@ -83,20 +130,63 @@ Do NOT recommend a channel that is already present in the input list.`;
   return (
     <section className="max-w-3xl mx-auto p-8 mt-10 bg-white rounded-lg shadow-lg font-secondary">
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900 font-primary">YouTube Channel Recommender</h2>
-      <p className="text-sm mb-4 text-gray-700">
-        Need to extract your subscriptions?{' '}
-        <Link to="/extract-youtube" className="text-primary-700 underline">
-          Use the YouTube Page Extraction page
-        </Link>
-        .
-      </p>
-      <textarea
-        rows={5}
-        placeholder="Paste your current YouTube subscriptions here (names and URLs if available)"
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-        className="w-full p-3 border border-gray-300 rounded-lg mb-6 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
-      />
+      <label className="block mb-4 text-gray-700 font-medium">
+        <input
+          type="checkbox"
+          checked={useSubscriptions}
+          onChange={(e) => handleToggleSubscriptions(e.target.checked)}
+          className="mr-2"
+        />
+        Use my subscription list
+      </label>
+      {useSubscriptions && (
+        <div className="mb-6 space-y-4">
+          <button
+            type="button"
+            onClick={() => setShowImporter((v) => !v)}
+            className="text-primary-700 underline"
+          >
+            {showImporter ? 'Hide subscription importer' : 'Upload subscriptions HTML file'}
+          </button>
+          {showImporter && (
+            <div
+              onDragOver={(e) => {
+                e.preventDefault();
+                setDragActive(true);
+              }}
+              onDragLeave={(e) => {
+                e.preventDefault();
+                setDragActive(false);
+              }}
+              onDrop={(e) => {
+                e.preventDefault();
+                setDragActive(false);
+                const file = e.dataTransfer.files && e.dataTransfer.files[0];
+                if (file) handleFile(file);
+              }}
+              className={`p-4 border-2 border-dashed rounded-lg ${dragActive ? 'bg-primary-50 border-primary-600' : 'border-gray-300'}`}
+            >
+              <input
+                type="file"
+                accept="text/html"
+                onChange={(e) => {
+                  const f = e.target.files && e.target.files[0];
+                  if (f) handleFile(f);
+                }}
+                className="w-full"
+              />
+            </div>
+          )}
+          {error && <p className="text-sm text-red-600">{error}</p>}
+          <textarea
+            rows={5}
+            placeholder="Your subscriptions will appear here"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
+          />
+        </div>
+      )}
       <label className="block mb-4 text-gray-700 font-medium">
         Number of recommendations to make:
         <input
@@ -119,7 +209,7 @@ Do NOT recommend a channel that is already present in the input list.`;
       </label>
       <button
         onClick={getRecommendations}
-        disabled={loading || !inputText}
+        disabled={loading}
         className="w-full py-3 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center justify-center"
       >
         {loading ? (
