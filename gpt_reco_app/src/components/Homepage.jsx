@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import OpenAI from 'openai';
 import Cookies from 'js-cookie';
-import Spinner from './Spinner.jsx';
+import LoadingSkeleton from './LoadingSkeleton.jsx';
 
 
 function HomepageComponent() {
@@ -115,7 +115,7 @@ function HomepageComponent() {
       >
         {loading ? (
           <>
-            <Spinner />
+            <LoadingSkeleton className="h-5 w-5 mr-2" />
             Checking...
           </>
         ) : (

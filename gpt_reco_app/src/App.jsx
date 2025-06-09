@@ -8,7 +8,7 @@ const TermsOfService = lazy(() => import('./pages/legal/TermsOfService.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
 import Navbar from './components/Navbar.jsx';
-import Spinner from './components/Spinner.jsx';
+import PageSkeleton from './components/PageSkeleton.jsx';
 
 import Footer from './components/Footer.jsx';
 
@@ -17,7 +17,7 @@ function App() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-grow px-4 max-w-4xl mx-auto">
-        <Suspense fallback={<Spinner />}>
+        <Suspense fallback={<PageSkeleton />}>
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/about" element={<About />} />
