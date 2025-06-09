@@ -83,6 +83,13 @@ Do NOT recommend a channel that is already present in the input list.`;
   return (
     <section className="max-w-3xl mx-auto p-8 mt-10 bg-white rounded-lg shadow-lg font-secondary">
       <h2 className="text-3xl font-extrabold mb-6 text-gray-900 font-primary">YouTube Channel Recommender</h2>
+      <p className="text-sm mb-4 text-gray-700">
+        Need to extract your subscriptions?{' '}
+        <Link to="/extract-youtube" className="text-primary-700 underline">
+          Use the YouTube Page Extraction page
+        </Link>
+        .
+      </p>
       <textarea
         rows={5}
         placeholder="Paste your current YouTube subscriptions here (names and URLs if available)"
@@ -110,13 +117,6 @@ Do NOT recommend a channel that is already present in the input list.`;
           className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
         />
       </label>
-      <p className="text-sm mb-4 text-gray-700">
-        Need to extract your subscriptions?{' '}
-        <Link to="/extract-youtube" className="text-primary-700 underline">
-          Use the YouTube Page Extraction page
-        </Link>
-        .
-      </p>
       <button
         onClick={getRecommendations}
         disabled={loading || !inputText}
