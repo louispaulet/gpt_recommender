@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, test, expect, vi } from 'vitest';
 import YouTubeRecommendationList from '../components/YouTubeRecommendationList.jsx';
@@ -19,4 +19,14 @@ test('handles duplicate toggle', async () => {
   const toggle = screen.getByLabelText('Toggle display of duplicate recommendations');
   await userEvent.click(toggle);
   expect(screen.getAllByRole('link').length).toBe(2);
+});
+
+test('fetches url statuses', async () => {
+  globalThis.fetch = vi
+    .fn()
+    .mockResolvedValueOnce({ json: () => Promise.resolve({ status: 200 }) })
+    .mockResolvedValueOnce({ json: () => Promise.resolve({ status: 404 }) });
+  render(<YouTubeRecommendationList recommendations={recs.slice(0, 2)} />);
+  await screen.findAllByRole('link');
+  await waitFor(() => expect(globalThis.fetch.mock.calls.length).toBeGreaterThan(0));
 });
