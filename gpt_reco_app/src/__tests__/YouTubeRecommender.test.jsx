@@ -1,9 +1,14 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { test, expect } from 'vitest';
 import YouTubeRecommender, { parseSubscriptions } from '../components/YouTubeRecommender.jsx';
 
 test('button disabled without input', () => {
-  render(<YouTubeRecommender />);
+  render(
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <YouTubeRecommender />
+    </MemoryRouter>
+  );
   const btn = screen.getByRole('button', { name: /get recommendations/i });
   expect(btn).toBeDisabled();
 });
