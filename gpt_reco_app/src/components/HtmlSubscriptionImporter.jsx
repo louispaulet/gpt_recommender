@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiCopy, FiUpload, FiDownload } from 'react-icons/fi';
-import Spinner from './Spinner.jsx';
+import LoadingSkeleton from './LoadingSkeleton.jsx';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function parseSubscriptions(html) {
@@ -129,7 +129,7 @@ const HtmlSubscriptionImporter = () => {
       {error && <p className="text-sm text-red-600">{error}</p>}
       {loading && (
         <div className="flex justify-center">
-          <Spinner size={24} />
+          <LoadingSkeleton className="h-6 w-6" />
         </div>
       )}
       {results.length > 0 && (
